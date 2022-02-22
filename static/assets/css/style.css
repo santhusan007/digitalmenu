@@ -448,7 +448,7 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 50vh;
+  height: 30vh;
   background: url("../img/hero-bg.jpg") top center;
   background-size: cover;
   position: relative;
@@ -602,6 +602,11 @@ h1, h2, h3, h4, h5, h6 {
   #hero .play-btn {
     margin-top: 30px;
   }
+}
+
+.cateogery{
+  color: orange;
+  font-size: 16px;
 }
 
 @media (max-height: 500px) {
@@ -810,7 +815,7 @@ section {
 .section-title p {
   margin: 0;
   margin: 0;
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 700;
   font-family: "Playfair Display", serif;
   color: #cda45e;
@@ -1045,7 +1050,7 @@ section {
 }
 
 .menu .menu-item {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .menu .menu-img {
@@ -1102,7 +1107,7 @@ section {
 .menu .menu-ingredients {
   margin-left: 15px;
   font-style: italic;
-  font-size: 14px;
+  font-size: 10px;
   font-family: "Poppins", sans-serif;
   color: rgba(255, 255, 255, 0.5);
 }
