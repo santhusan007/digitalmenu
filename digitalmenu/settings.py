@@ -99,7 +99,7 @@ DATABASES={
       'USER':'fmadpgwfrasyrt',
       'PASSWORD':'2ddb6ff26c4e949391a3afea9d9494b4fdec9e9761c2658a6c9ae8e6512634e9',
       'HOST':'ec2-54-161-238-249.compute-1.amazonaws.com',
-      'PORT':5432,
+      'PORT':'5432',
    }
 }
 
