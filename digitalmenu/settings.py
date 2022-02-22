@@ -174,9 +174,7 @@ AWS_S3_REGION_NAME='ap-south-1'
 AWS_S3_ADDRESSING_STYLE='virtual'
 AWS_S3_SIGNATURE_VERSION='s3v4'
 
-# Configure Django App for Heroku.
-import django_heroku
-django_heroku.settings(locals())
+
 
 
 
