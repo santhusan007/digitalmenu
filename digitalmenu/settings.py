@@ -12,25 +12,21 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-import environ
-import django_heroku
 
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR/'digitalmenu','.env'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY='xv#r)3dnz&@5)1y!dc8&ev6e(b&btps3i)3r1@!os$-&l6bm9o'
+SECRET_KEY=os.environ.get('DJ_MENU_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -98,11 +94,11 @@ WSGI_APPLICATION = 'digitalmenu.wsgi.application'
 DATABASES={
    'default':{
       'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'d94l94uqpa07r8',
-      'USER':'fmadpgwfrasyrt',
-      'PASSWORD':'2ddb6ff26c4e949391a3afea9d9494b4fdec9e9761c2658a6c9ae8e6512634e9',
-      'HOST':'ec2-54-161-238-249.compute-1.amazonaws.com',
-      'PORT':'5432',
+      'NAME':os.environ.get('POSTGRES_DEV_NAME'),
+      'USER':os.environ.get('POSTGRES_USER'),
+      'PASSWORD':os.environ.get('POSTGRES_PASSWORD'),
+      'HOST':os.environ.get('POSTGRES_HOST'),
+      'PORT':os.environ.get('POSTGRES_PORT'),
    }
 }
 
@@ -166,9 +162,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AWS_ACCESS_KEY_ID='AKIAWF6SOC3HM5RGKINX'
-AWS_SECRET_ACCESS_KEY='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'
-AWS_STORAGE_BUCKET_NAME='mmd2022'
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_FILE_OVERWRITE=False
 AWS_DEFAULT_ACL=None
