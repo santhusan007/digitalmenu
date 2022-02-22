@@ -33,7 +33,7 @@ SECRET_KEY='xv#r)3dnz&@5)1y!dc8&ev6e(b&btps3i)3r1@!os$-&l6bm9o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mymenudigi.herokuapp.com']
 
 
 # Application definition
