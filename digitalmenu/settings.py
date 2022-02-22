@@ -26,14 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
 
 
-
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str("SECRET_KEY")
+SECRET_KEY ='django-insecure-vsw9j^t4og2xxd^)1tidt0^pa93jx4@cge-q7%@6x+o2i^15#o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
