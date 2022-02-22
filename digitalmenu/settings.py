@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'digitalmenu.wsgi.application'
 DATABASES={
    'default':{
       'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':os.environ.get('POSTGRES_DEV_NAME'),
-      'USER':os.environ.get('POSTGRES_USER'),
-      'PASSWORD':os.environ.get('POSTGRES_PASSWORD'),
-      'HOST':os.environ.get('POSTGRES_HOST'),
-      'PORT':os.environ.get('POSTGRES_PORT'),
+      'NAME':str(os.environ.get('POSTGRES_DEV_NAME')),
+      'USER':str(os.environ.get('POSTGRES_USER')),
+      'PASSWORD':str(os.environ.get('POSTGRES_PASSWORD')),
+      'HOST':str(os.environ.get('POSTGRES_HOST')),
+      'PORT':5432,
    }
 }
 
@@ -163,9 +163,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID=str(os.environ.get('AWS_ACCESS_KEY_ID'))
+AWS_SECRET_ACCESS_KEY=str(os.environ.get('AWS_SECRET_ACCESS_KEY'))
+AWS_STORAGE_BUCKET_NAME=str(os.environ.get('AWS_STORAGE_BUCKET_NAME'))
 
 AWS_S3_FILE_OVERWRITE=False
 AWS_DEFAULT_ACL=None
