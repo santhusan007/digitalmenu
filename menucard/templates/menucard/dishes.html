@@ -1,0 +1,31 @@
+{% extends "menucard/base.html" %}
+{% block content %}
+<div class="dishes">
+    <!--Main layout-->
+  <main class="mt-3 pt-4 main">
+    <div class="container dark-grey-text">
+      <div class="row wow fadeIn">
+        <div class="col-md-6 mb-4">
+          <img src="{{ item.image.url }}" class="img-fluid mt-4" alt="">
+        </div>
+        <div class="col-md-6 mb-4 information">
+          <!--Content-->
+          <div class="p-4 content">
+            <div class="mt-0">
+                <h2><u>{{ item.title }}</u><span class="badge badge-{{ item.label_colour }} ml-2">{{ item.labels }}</span></h2>
+            </div>
+            <div class="lead">
+              {% if item.description %}
+              <h5>{{ item.description }}</h5>
+              {% endif %}
+              <h3>₹ {{ item.price }} </h3>
+              
+            </div>
+            <a href="{% url 'menucard:item_list'%}" class="btn btn-primary btn-md my-0 p">Go BBack to Items</a>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </main>
+  {% endblock %}

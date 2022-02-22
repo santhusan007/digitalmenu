@@ -1,0 +1,203 @@
+{% extends "menucard/base.html" %}
+ 
+ <!-- ======= Top Bar ======= -->
+  
+  <!-- ======= Header ======= -->
+
+  <!-- ======= Hero Section ======= -->
+
+  {% block content %}
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1>Welcome to <span>Binge</span></h1>
+          <h2>Virar West ,Maharastra</h2>
+
+          
+        </div>
+        
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <!-- ======= Menu Section ======= -->
+   
+      
+    
+    <section id="menu" class="menu section-bg">
+      <div class="container" >
+
+        <div class="section-title">
+         
+        
+    <div  class="header" id="myHeader" style="width: 60%;float: right; overflow: hidden ">
+        
+            <div class="sb-example-1">
+            <div  class="search">
+                <input id="filter" type="text" class="searchTerm" placeholder="What are you looking for?">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+                
+            
+          </div>
+      </div>
+   </div>
+
+  <p id="results" > Menu</p>
+      </div>
+      
+        
+        {% for category in menu_items %}
+            {% if category.created_by_id == 1 %}
+        
+            <h2 id="{{category}}" > {{category}} </h2>
+            
+            <div  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+              
+              {% for item in category.get_products  %} 
+                    <div class="col-lg-6 menu-item filter-starters">
+                     {% if item.image %} 
+                    <img src="{{item.image.url }}" class="menu-img" alt="">
+                                      
+                    {% endif %}
+                    {%if item.type == 'NON-VEG' %}
+                    <i class="bi bi bi-circle-fill" style="color: red;"></i>
+                    <div class="menu-content">
+                         {{item.title}}<span> ₹{{item.price}}</span>
+                    
+                    </div>
+                    {% else %}
+                    
+                    <i class="bi bi bi-circle-fill" style="color: green;"></i>
+                    <div class="menu-content">
+                         {{item.title}}<span> ₹{{item.price}}</span>                    
+                    </div>
+                    {% endif %}
+
+                    <div class="menu-ingredients">
+                      {{item.description}}
+                    </div>
+                  
+                  </div>
+          
+              {% endfor %}
+       
+            </div>
+            {% endif %}
+            {% endfor %}
+           
+          </div>
+       
+    </section><!-- End Menu Section -->
+
+
+    
+
+    <section id="specials" class="specials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Specials</h2>
+          <p>Check Our Specials</p>
+        </div>
+        </div>
+        </section>
+        <div class="myButtonContainer">
+
+          <div id="mybutton">
+              <!--button class="feedback toggle">Browse Menu</button-->
+              <input class="feedback" type="button" id="btnShow" value="Browse Menu" />
+              <div id="dialog" style="display: none" ;>
+
+                  <ul>
+                    {% for category in menu_items %}
+                  {% if category.created_by_id == 1 %}
+        
+            
+                      <li><a href="#{{category}}">{{category}}</a></li>
+
+                      {% endif %}
+                      {% endfor %}
+                      
+                      
+                 
+                  </ul>
+              </div>
+
+
+
+              <div >
+                  <a href="https://wa.link/3unt79" target="_blank"> <img src="/media/images/wa1.png" id="wa"   alt=""></a>
+
+              </div>
+              <div >
+                  <a href="tel:+917306191467"> <img src="/media/images/call.png" id="phone" alt=""></a>
+
+              </div>
+          </div>
+          </div>
+
+  <!-- Vendor JS Files -->
+
+<script type="text/javascript">
+$(function () {
+$("#btnShow").click(function () {
+    $("#dialog").dialog({
+        modal: false,
+        title: "Menu",
+       width: 300,
+        height: 250,
+        position: { my: "bottom center", at: "center bottom ", of: window },
+        open: function (event, ui) {
+            setTimeout(function () {
+                $("#dialog").dialog("close");
+            }, 2000);
+        }
+    });
+});
+});
+</script>
+
+
+<script type="text/javascript">
+window.onload=function(){      
+$("#filter").keyup(function() {
+
+var filter = $(this).val(),
+count = 0;
+
+$('#results div').each(function() {
+
+if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+  $(this).hide();
+
+} else {
+  $(this).show();
+  count++;
+}
+});
+});
+}
+</script>
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+if (window.pageYOffset > sticky) {
+header.classList.add("sticky");
+} else {
+header.classList.remove("sticky");
+}
+}
+</script>
+ 
+
+{% endblock content %}

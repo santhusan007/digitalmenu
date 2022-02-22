@@ -1,0 +1,43 @@
+{% extends "menucard/base.html" %}
+{% block content %}
+<div class="cart">
+    <div class="row">
+        <div class="col-sm-12">
+            {% if items %}
+            <div class="table-responsive">
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        
+                        <th scope="col">Title</th>
+                        <th scope="col">Decription</th>
+                        
+                        <th scope="col">Price</th>
+                        
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                    <tr>
+                        
+                        <td>{{ item.title }} <span class="badge badge-{{ item.label_colour }}">{{ item.labels }}</span></td></td>
+                        <td>{{ item.description }}</td>
+                        
+                        <td>{{ item.price }}</td>
+                        
+                        <td><a class="btn btn-success" href="{% url 'menucard:item-update' item.id %}">Update</a></td>
+                        <td><a class="btn btn-danger" href="{% url 'menucard:item-delete' item.id %}">Delete</a></td>
+                    </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <h4 class="text-center">Sorry, you have no item yet!!!</h4>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
