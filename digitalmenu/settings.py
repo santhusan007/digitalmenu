@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY=os.environ.get('DJ_MENU_SECRET_KEY')
+SECRET_KEY=str(os.environ.get('DJ_MENU_SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -95,10 +95,10 @@ WSGI_APPLICATION = 'digitalmenu.wsgi.application'
 DATABASES={
    'default':{
       'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':str(os.environ.get('POSTGRES_DEV_NAME')),
-      'USER':str(os.environ.get('POSTGRES_USER')),
-      'PASSWORD':str(os.environ.get('POSTGRES_PASSWORD')),
-      'HOST':str(os.environ.get('POSTGRES_HOST')),
+      'NAME':'d94l94uqpa07r8',
+      'USER':'fmadpgwfrasyrt',
+      'PASSWORD':'2ddb6ff26c4e949391a3afea9d9494b4fdec9e9761c2658a6c9ae8e6512634e9',
+      'HOST':'ec2-54-161-238-249.compute-1.amazonaws.com',
       'PORT':5432,
    }
 }
