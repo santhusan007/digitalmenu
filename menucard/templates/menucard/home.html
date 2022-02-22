@@ -1,10 +1,4 @@
 {% extends "menucard/base.html" %}
- 
- <!-- ======= Top Bar ======= -->
-  
-  <!-- ======= Header ======= -->
-
-  <!-- ======= Hero Section ======= -->
 
   {% block content %}
   <section id="hero" class="d-flex align-items-center" >
@@ -48,7 +42,7 @@
       </div>
    </div>
 
-  <p id="results" > Menu</p>
+  <p > Menu</p>
       </div>
       
         
@@ -57,7 +51,7 @@
         
             <h2 id="{{category}}" > {{category}} </h2>
             
-            <div  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+            <div id="results"  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
               
               {% for item in category.get_products  %} 
                     <div class="col-lg-6 menu-item filter-starters">
@@ -123,8 +117,7 @@
 
                       {% endif %}
                       {% endfor %}
-                      
-                      
+                   
                  
                   </ul>
               </div>
