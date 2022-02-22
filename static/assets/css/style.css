@@ -16,7 +16,7 @@ html, body {
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #0c0b09;
+  background: midnightblue;
   color: #fff;
 }
 
@@ -450,7 +450,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 30vh;
-  background: url("../img/hero-bg.jpg") top center;
+  background: url("../img/hero-bg.jpeg") top center;
   background-size: cover;
   position: relative;
   padding: 0;
