@@ -43,7 +43,7 @@ class Item(models.Model):
     
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=250,blank=True)
-    price = models.FloatField()
+    price = models.CharField(max_length=250,blank=True)
     #instructions = models.CharField(max_length=250,default="Jain Option Available")
     image = models.ImageField(upload_to='images/',blank=True,null=True)
     type= models.CharField(max_length=25, choices=TYPE, blank=True)

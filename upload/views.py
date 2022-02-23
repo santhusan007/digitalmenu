@@ -42,11 +42,12 @@ def upload_file_view(request):
         print('headers: %s' %(headers))
         for line in enumerate(lines):
             title=line[1][0].upper()
-            categories=Category.objects.get(id=line[1][4])
             created_by=User.objects.get(id=line[1][6])
+            categories=Category.objects.get(id=line[1][4])
             Item.objects.create(title=title,description=line[1][1],price=line[1][2],type=line[1][3],
                                    categories=categories,label=line[1][5] ,created_by=created_by)
-            
+
+            #Category.objects.create(title=title,slug=slug,created_by=created_by)
 
         obj.activated=True
         obj.save()

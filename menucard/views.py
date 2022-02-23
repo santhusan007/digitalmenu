@@ -30,6 +30,11 @@ class MenuListView(ListView):
     template_name = 'menucard/home.html'
     context_object_name = 'menu_items'
 
+class GlobalListView(ListView):
+    model = Category
+    template_name = 'menucard/globalbinge.html'
+    context_object_name = 'menu_items'
+
     
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
