@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('menucard.urls'),name='menucard'),
     path('accounts/', include('accounts.urls'),name='accounts'),
+    path('upload/',include('upload.urls'),name='upload'),
+
 ]
 
 if settings.DEBUG:

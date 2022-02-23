@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'menucard',
     'accounts',
     'crispy_forms',
-    'storages'
+    'storages',
+    'upload',
 ]
 
 MIDDLEWARE = [
