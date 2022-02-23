@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from matplotlib.pyplot import title
 from .forms import UploadModelform
 from.models import UploadFile
 from django.core.files import File
 import csv
 import boto3
-import pandas as pd
 from django.conf import settings
 from menucard.models import Category,Item
 from django.contrib.auth.models import User
