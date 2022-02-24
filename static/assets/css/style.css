@@ -31,7 +31,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", serif;
+  font-family: "Open Sans", sans-serif;
   margin-top: 20px ;
 }
 
@@ -118,6 +118,8 @@ h1, h2, h3, h4, h5, h6 {
   visibility: visible;
   opacity: 1;
 }
+
+
 
 /*--------------------------------------------------------------
 # Disable aos animation delay on mobile devices
@@ -458,7 +460,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(36, 28, 28, 0.5);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -656,10 +658,20 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Search bar
 --------------------------------------------------------------*/
+.imageContainer > img:hover {
+  width: 150px;
+  height: 150px;
+}
+
+
+
 .sticky {
   position: fixed;
-  top: 0;
+  left:150px;
+  top: 10px;
   width: 100%;
+  z-index: 9;
+  
 }
 
 
@@ -669,6 +681,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   display: flex;
   border-radius: 50px;
+  z-index: 1;
 }
 .sb-example-1 .searchTerm {
   width: 100%;
@@ -678,10 +691,12 @@ h1, h2, h3, h4, h5, h6 {
   outline: none;
   color: black;
   border-radius: 50px;
+  z-index: 9;
 }
 .sb-example-1 .searchTerm:focus{
   color:black;
   border-radius: 50px;
+  z-index: 9;
 }
 .sb-example-1 .searchButton {
   width: 40px;
@@ -693,12 +708,14 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   font-size: 20px;
   border-radius: 50px;
+  z-index: 9;
 }
 
 .myButtonContainer{
   position: fixed;
   width: 400px;
-  height: 100px
+  height: 100px;
+  z-index: 9;
 }
 
 .feedback {
@@ -707,12 +724,14 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px 10px;
   border-radius: 25px;
   border-color: #f30611;
+  z-index: 9;
 }
 
 #mybutton {
   position: fixed;
   bottom: 0px;
   left: 600px;
+  z-index: 9;
   
 }
 
@@ -721,7 +740,8 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0px;
   width: 2em;
   height: 2em;
-  left: 500px;;
+  left: 500px;
+  z-index: 9;
 }
 
 #phone {
@@ -730,6 +750,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 2em;
   height: 2em;
   right: 500px;
+  z-index: 9;
   
 }
 
@@ -744,11 +765,13 @@ h1, h2, h3, h4, h5, h6 {
   padding: 3px 3px;
   border-radius: 25px;
   border-color: #f30611;
+  z-index: 9;
 }
 #mybutton {
   position: fixed;
   bottom: 15px;
-  left: 150px;        
+  left: 125px;    
+  z-index: 9;    
 }
 
 #wa {
@@ -757,6 +780,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 2em;
   height: 2em;
   left: 40px;
+  z-index: 9;
   
 }
 
@@ -766,6 +790,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 2em;
   height: 2em;
   right: 50px;
+  z-index: 9;
   
 }
 
@@ -818,8 +843,8 @@ section {
   margin: 0;
   font-size: 24px;
   font-weight: 700;
-  font-family: "Playfair Display", serif;
-  color: #cda45e;
+  font-family: "Open Sans", sans-serif;
+  color: white;
 }
 
 /*--------------------------------------------------------------
@@ -1062,7 +1087,7 @@ section {
 }
 
 .menu .menu-content {
-  margin-left: 15px;
+  margin-left: 0px;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -1105,7 +1130,7 @@ section {
 }
 
 .menu .menu-ingredients {
-  margin-left: 15px;
+  margin-left: 10px;
   font-style: italic;
   font-size: 10px;
   font-family: "Poppins", sans-serif;
