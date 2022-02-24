@@ -607,7 +607,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cateogery{
   color: orange;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 @media (max-height: 500px) {
