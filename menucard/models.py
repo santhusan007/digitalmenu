@@ -55,6 +55,11 @@ class Item(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+
     # def save(self,*args,**kwargs):
     #     super().save(*args,**kwargs)
                

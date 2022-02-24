@@ -12,7 +12,7 @@
       
       </div>
     </div>
-  </section><!-- End Hero -->
+  </section><!-- End Hero data-aos="fade-up" data-aos-delay="200" -->
 
   <main id="main">
     <!-- ======= Menu Section ======= -->
@@ -46,35 +46,36 @@
         {% if category.created_by_id == 2  %} 
         
         <div id="results"  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-       
+            
         {% for item in category.get_products  %}
-         {% if item.label  %} 
+         {% if item.label %} 
          <div class="col-lg-6 menu-item filter-starters">
             {% if item.image %} 
            <img src="{{item.image.url }}" class="menu-img" alt="">
-                             
-           {% endif %}
-           {%if item.type == 'NON-VEG' %}
+                           
+            {% endif %}
+            {% if item.type == 'NON-VEG' %}
            <i class="bi bi bi-circle-fill " style="color: red;font-size: 10px;bottom:2px;"></i>
            <div class="menu-content">
                <span style="background: midnightblue;"> {{item.title}} </span> <span> ₹{{item.price}}</span>
            
            </div>
-           {% else %}
+            {% else %}
            
            <i class="bi bi bi-circle-fill" style="color: green;font-size: 10px"></i>
            <div class="menu-content">
                <span style="background: midnightblue;"> {{item.title}}</span>  <span> ₹{{item.price}}</span>                    
            </div>
-           {% endif %}
+            {% endif %}
 
            <div class="menu-ingredients">
              {{item.description}} 
            </div>
          
          </div>
-         {% endif %}
+         {% endif %}  
      {% endfor %}
+     
 
    </div>
    
@@ -88,7 +89,7 @@
         
             <h2 id="{{category}}" class="cateogery" > {{category}} </h2>
             
-            <div id="results"  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+            <div id="results"  class="row menu-container" >
               
               {% for item in category.get_products  %} 
                     <div class="col-lg-6 menu-item filter-starters">
