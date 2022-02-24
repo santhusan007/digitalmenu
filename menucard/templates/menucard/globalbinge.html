@@ -53,7 +53,7 @@ body{
       <h2 class="cateogery" > RECOMMENDED </h2>
       {% for category in menu_items %}
       {% if category.created_by_id == 2 %}
-      <div id="results"  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+      <div  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
         {% for item in category.get_products  %} 
         {% if item.label %}
         <div class="col-lg-6 menu-item filter-starters imageContainer">
