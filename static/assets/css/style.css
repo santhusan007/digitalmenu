@@ -658,9 +658,11 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Search bar
 --------------------------------------------------------------*/
+
 .imageContainer > img:hover {
   width: 150px;
   height: 150px;
+  transition: 0.25s ease;
 }
 
 
@@ -770,7 +772,7 @@ h1, h2, h3, h4, h5, h6 {
 #mybutton {
   position: fixed;
   bottom: 15px;
-  left: 125px;    
+  left: 135px;    
   z-index: 9;    
 }
 
