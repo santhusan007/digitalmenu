@@ -763,11 +763,13 @@ h1, h2, h3, h4, h5, h6 {
 @media only screen and (max-width: 600px){
 
 .feedback {
-  background-color : #f30611;
+  
+  background: #ff0000;
   color: white;
-  padding: 3px 3px;
-  border-radius: 25px;
-  border-color: #f30611;
+  font-weight: 600;
+  padding: 8px 8px 8px 8px;
+  border-radius: 30px;
+  border-color:rgba(0, 0, 0, 0);
   z-index: 9;
 }
 #mybutton {
@@ -780,8 +782,8 @@ h1, h2, h3, h4, h5, h6 {
 #wa {
   position: fixed;
   bottom: 15px;
-  width: 2em;
-  height: 2em;
+  width: 2.5em;
+  height: 2.5em;
   left: 5%;
   z-index: 9;
   
@@ -790,8 +792,8 @@ h1, h2, h3, h4, h5, h6 {
 #phone {
   position: fixed;
   bottom: 15px;
-  width: 2em;
-  height: 2em;
+  width: 2.5em;
+  height: 2.5em;
   right: 5%;
   z-index: 9;
   

@@ -7,6 +7,13 @@ body{
   font-size: 14px;
 }
 
+.box-shadow{
+  	background: midnightblue;
+    box-shadow: 4px 3px 8px 1px #969696;
+  	-webkit-box-shadow: 4px 3px 8px 1px #969696;
+    
+}
+
 
 
   </style>
@@ -53,6 +60,7 @@ body{
       <h2 class="cateogery" > RECOMMENDED </h2>
       {% for category in menu_items %}
       {% if category.created_by_id == 2 %}
+      
       <div id="results"  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
         {% for item in category.get_products  %} 
         {% if item.label %}
@@ -69,7 +77,7 @@ body{
          </div>
          {% else %}
          
-         <i class="bi bi-stop-btn" style="color: green;font-size: 15px;margin-left:10px;"></i>
+         <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
          <div class="menu-content">
            <span style= "background: midnightblue;color: white;  "> {{item.title}} </span> <span style="background: midnightblue;color: white;" > ₹{{item.price}}</span>                    
          </div>
@@ -81,21 +89,24 @@ body{
          
         </div>
         {% endif %}
+        
          {% endfor %}
     
         
       </div>
+      
       {% endif %}
+      
         {% endfor %}
       
-   
+       
          
       {% for category in menu_items %}
       {% if category.created_by_id == 2 %}
   
-      <h2 id="{{category}}" class="cateogery" style="left: 15px;"> {{category}} </h2>
+      <h2 id="{{category}}" class="cateogery" style="left: 20px;"> {{category}} </h2>
       
-      <div id="results"  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+      <div id="results"  class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
         
         {% for item in category.get_products  %} 
               <div class="col-lg-6 menu-item filter-starters imageContainer">
@@ -111,7 +122,7 @@ body{
               </div>
               {% else %}
               
-              <i class="bi bi-stop-btn" style="color: green;font-size: 15px;margin-left:10px;"></i>
+              <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
               <div class="menu-content">
                 <span style= "background: midnightblue;color: white;  "> {{item.title}} </span> <span style="background: midnightblue;color: white;" > ₹{{item.price}}</span>                    
               </div>
@@ -124,8 +135,9 @@ body{
             </div>
     
         {% endfor %}
- 
+        
       </div>
+      
       {% endif %}
       {% endfor %}
      
@@ -177,6 +189,7 @@ body{
 $(function () {
 $("#btnShow").click(function () {
     $("#dialog").dialog({
+      closeOnEscape:true,
         modal: false,
         title: "Menu",
        width: 300,

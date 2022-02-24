@@ -1,3 +1,4 @@
+from typing import Counter
 from django.shortcuts import render,redirect
 from django.conf import settings
 from django.shortcuts import reverse
@@ -7,6 +8,7 @@ from django.views.generic import  ListView,CreateView,UpdateView,DeleteView
 from .models import Item,Category
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 # Create your views here.
 
@@ -29,11 +31,19 @@ class MenuListView(ListView):
     model = Category
     template_name = 'menucard/home.html'
     context_object_name = 'menu_items'
-
+    # def get_context_data(self, **kwargs):
+    #     context= super().get_context_data(**kwargs)
+    #     context['details']=Item.objects.values('categories').annotate(num_books=Count('title'))
+    #     return context
+    
 class GlobalListView(ListView):
     model = Category
     template_name = 'menucard/globalbinge.html'
     context_object_name = 'menu_items'
+    # def get_context_data(self, **kwargs):
+    #     context= super().get_context_data(**kwargs)
+    #     context['details']=Category.objects.annotate(items_count=Count('item'))
+    #     return context
 
     
 
