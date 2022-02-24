@@ -453,6 +453,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 30vh;
   background: url("../img/hero-bg.jpeg") top center;
+  filter: brightness(200%);
   background-size: cover;
   position: relative;
   padding: 0;
@@ -732,7 +733,7 @@ h1, h2, h3, h4, h5, h6 {
 #mybutton {
   position: fixed;
   bottom: 0px;
-  left: 600px;
+  left: 50%;
   z-index: 9;
   
 }
@@ -742,7 +743,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0px;
   width: 2em;
   height: 2em;
-  left: 500px;
+  left: 10%;
   z-index: 9;
 }
 
@@ -751,7 +752,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0px;
   width: 2em;
   height: 2em;
-  right: 500px;
+  right: 10%;
   z-index: 9;
   
 }
@@ -772,7 +773,7 @@ h1, h2, h3, h4, h5, h6 {
 #mybutton {
   position: fixed;
   bottom: 15px;
-  left: 135px;    
+  left: 33%;    
   z-index: 9;    
 }
 
@@ -781,7 +782,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 15px;
   width: 2em;
   height: 2em;
-  left: 40px;
+  left: 5%;
   z-index: 9;
   
 }
@@ -791,7 +792,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 15px;
   width: 2em;
   height: 2em;
-  right: 50px;
+  right: 5%;
   z-index: 9;
   
 }
@@ -906,6 +907,7 @@ section {
 --------------------------------------------------------------*/
 .about {
   background: url("../img/about-bg.jpg") center center;
+  filter: brightness(200%);
   background-size: cover;
   position: relative;
   padding: 80px 0;
