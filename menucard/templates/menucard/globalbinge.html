@@ -59,19 +59,19 @@
                     {%if item.type == 'NON-VEG' %}
                     <i class="bi bi bi-circle-fill " style="color: red;font-size: 10px;bottom:2px;"></i>
                     <div class="menu-content">
-                         {{item.title}} {{item.title}} <span> ₹{{item.price}}</span>
+                        <span style="background: midnightblue;"> {{item.title}} </span> <span> ₹{{item.price}}</span>
                     
                     </div>
                     {% else %}
                     
                     <i class="bi bi bi-circle-fill" style="color: green;font-size: 10px"></i>
                     <div class="menu-content">
-                         {{item.title}} {{item.title}} <span> ₹{{item.price}}</span>                    
+                        <span style="background: midnightblue;"> {{item.title}}</span>  <span> ₹{{item.price}}</span>                    
                     </div>
                     {% endif %}
 
                     <div class="menu-ingredients">
-                      {{item.description}} {{item.description}} 
+                      {{item.description}} 
                     </div>
                   
                   </div>
@@ -107,7 +107,7 @@
 
                   <ul>
                     {% for category in menu_items %}
-                  {% if category.created_by_id == 1 %}
+                  {% if category.created_by_id == 2 %}
         
             
                       <li><a href="#{{category}}">{{category}}</a></li>
@@ -141,12 +141,12 @@ $("#btnShow").click(function () {
         modal: false,
         title: "Menu",
        width: 300,
-        height: 250,
+        height: 300,
         position: { my: "bottom center", at: "center bottom ", of: window },
         open: function (event, ui) {
             setTimeout(function () {
                 $("#dialog").dialog("close");
-            }, 2000);
+            }, 4000);
         }
     });
 });
