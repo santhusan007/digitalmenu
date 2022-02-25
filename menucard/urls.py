@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from .views import ( MenuListView,ItemCreateView,menuDetail,item_list,
-                        ItemDeleteView,ItemUpdateView,landing,GlobalListView)
+                        ItemDeleteView,ItemUpdateView,landing,GlobalListView,TheBunkerListView)
 
 
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('',landing , name='landing'),
     path('hotel/',MenuListView.as_view() , name='menu'),
     path('globalbinge/',GlobalListView.as_view() , name='globalmenu'),
+    path('thebunker/',TheBunkerListView.as_view() , name='thebunker'),
     path('item/new/', ItemCreateView.as_view(), name='item-create'),
     path('dishes/<int:id>',menuDetail, name='dishes'),
     path('item-update/<int:pk>/', ItemUpdateView.as_view(), name='item-update'),

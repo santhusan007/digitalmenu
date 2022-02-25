@@ -45,6 +45,15 @@ class GlobalListView(ListView):
     #     context['details']=Category.objects.annotate(items_count=Count('item'))
     #     return context
 
+class TheBunkerListView(ListView):
+    model = Category
+    template_name = 'menucard/thebunker.html'
+    context_object_name = 'menu_items'
+    # def get_context_data(self, **kwargs):
+    #     context= super().get_context_data(**kwargs)
+    #     context['details']=Category.objects.annotate(items_count=Count('item'))
+    #     return context
+
     
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
