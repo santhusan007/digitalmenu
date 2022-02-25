@@ -8,9 +8,9 @@ body{
 }
 
 .box-shadow{
-  	background: midnightblue;
-    box-shadow: 4px 3px 8px 1px #969696;
-  	-webkit-box-shadow: 4px 3px 8px 1px #969696;
+  	background: #1c1f57;
+    box-shadow: 1px 4px  #969696;
+  	-webkit-box-shadow: 1px 4px  #969696;
     
 }
 
@@ -38,7 +38,7 @@ body{
     <section id="menu" class="menu section-bg">
       <div class="container" >
 
-        <div class="section-title">
+        <div class="section-title ">
          
         
     <div  class="header" id="myHeader" style="width: 60%;float: right; overflow: hidden ">
@@ -57,11 +57,13 @@ body{
 
   <p > Menu</p>
       </div>
+
+      
       <h2 class="cateogery" > RECOMMENDED </h2>
       {% for category in menu_items %}
       {% if category.created_by_id == 2 %}
       
-      <div id="results"  class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+      <div id="results"  class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
         {% for item in category.get_products  %} 
         {% if item.label %}
         <div class="col-lg-6 menu-item filter-starters imageContainer">
@@ -72,14 +74,14 @@ body{
          {%if item.type == 'NON-VEG' %}
          <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
          <div class="menu-content">
-              <span style="background: midnightblue;color: white;"> {{item.title}} </span> <span style="background: midnightblue;color: white;"> ₹{{item.price}}</span>
+              <span style="background: #1c1f57;color: white;"> {{item.title}} </span> <span style="background: #1c1f57;color: white;"> ₹{{item.price}}</span>
          
          </div>
          {% else %}
          
          <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
          <div class="menu-content">
-           <span style= "background: midnightblue;color: white;  "> {{item.title}} </span> <span style="background: midnightblue;color: white;" > ₹{{item.price}}</span>                    
+           <span style= "background: #1c1f57;color: white;  "> {{item.title}} </span> <span style="background: #1c1f57;color: white;" > ₹{{item.price}}</span>                    
          </div>
          {% endif %}
 
@@ -104,7 +106,8 @@ body{
       {% for category in menu_items %}
       {% if category.created_by_id == 2 %}
   
-      <h2 id="{{category}}" class="cateogery" style="left: 20px;"> {{category}} </h2>
+      <h2 id="{{category}}" class="cateogery" style="left: 20px;padding-top: 50px;
+      margin-top: -25px;"> {{category}} </h2>
       
       <div id="results"  class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
         
@@ -117,14 +120,14 @@ body{
               {%if item.type == 'NON-VEG' %}
               <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
               <div class="menu-content">
-                   <span style="background: midnightblue;color: white;"> {{item.title}} </span> <span style="background: midnightblue;color: white;"> ₹{{item.price}}</span>
+                   <span style="background: #1c1f57;color: white;"> {{item.title}} </span> <span style="background: #1c1f57;color: white;"> ₹{{item.price}}</span>
               
               </div>
               {% else %}
               
               <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
               <div class="menu-content">
-                <span style= "background: midnightblue;color: white;  "> {{item.title}} </span> <span style="background: midnightblue;color: white;" > ₹{{item.price}}</span>                    
+                <span style= "background: #1c1f57;color: white;  "> {{item.title}} </span> <span style="background: #1c1f57;color: white;" > ₹{{item.price}}</span>                    
               </div>
               {% endif %}
 
@@ -182,6 +185,9 @@ body{
               </div>
           </div>
           </div>
+          <br>
+          <br>
+          <br><br>
 
   <!-- Vendor JS Files -->
 
@@ -241,6 +247,8 @@ header.classList.remove("sticky");
 }
 }
 </script>
+
+
  
 
 {% endblock content %}
