@@ -17,6 +17,7 @@ body{
 #hero {
  
   background: url("/static/assets/img/thebunker.jpeg") top center;
+  top:-10px;
 
 }
 .section-bg {
@@ -34,9 +35,9 @@ body{
     
 }
 
-
-
   </style>
+
+  
   <section id="hero" class="d-flex align-items-center" >
     
     <div class="container position-relative text-left text-lg-start" data-aos="zoom-in" data-aos-delay="100">
@@ -81,7 +82,7 @@ body{
       
       <h2 class="cateogery" > RECOMMENDED </h2>
       {% for category in menu_items %}
-      {% if category.created_by_id == 2 %}
+      {% if category.created_by_id == 3 %}
       
       <div id="results"  class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
         {% for item in category.get_products  %} 
@@ -124,7 +125,7 @@ body{
        
          
       {% for category in menu_items %}
-      {% if category.created_by_id == 2 %}
+      {% if category.created_by_id == 3 %}
   
       <h2 id="{{category}}" class="cateogery" style="left: 20px;padding-top: 50px;
       margin-top: -25px;"> {{category}} </h2>
@@ -181,7 +182,7 @@ body{
 
                   <ul>
                     {% for category in menu_items %}
-                  {% if category.created_by_id == 2 %}
+                  {% if category.created_by_id == 3 %}
         
             
                       <li><a href="#{{category}}">{{category}}</a></li>
