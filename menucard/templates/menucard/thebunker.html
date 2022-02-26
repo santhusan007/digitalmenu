@@ -6,6 +6,8 @@
 
 :root {
   --bg-color:#1d1f10;
+  --my--color:var(--my-color) ;
+  --cat--color:orange ;
 
 }
 
@@ -15,10 +17,13 @@ body{
 }
 
 #hero {
- 
-  background: url("/static/assets/img/thebunker.jpeg") top center;
-  top:-10px;
-
+  width: 100%;
+  height: 30vh;
+  background: url("/static/assets/img/thebunker1.jpeg") top center;
+  filter: brightness(150%);
+  background-size: cover;
+  position: relative;
+  padding: 0;
 }
 .section-bg {
   background-color: var(--bg-color);
@@ -95,14 +100,14 @@ body{
          {%if item.type == 'NON-VEG' %}
          <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
          <div class="menu-content">
-              <span style="background: var(--bg-color);color: white;"> {{item.title}} </span> <span style="background: var(--bg-color);color: white;"> ₹{{item.price}}</span>
+              <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);"> ₹{{item.price}}</span>
          
          </div>
          {% else %}
          
          <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
          <div class="menu-content">
-           <span style= "background: var(--bg-color);color: white;  "> {{item.title}} </span> <span style="background: var(--bg-color);color: white;" > ₹{{item.price}}</span>                    
+           <span style= "background: var(--bg-color);color: var(--my-color);  "> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);" > ₹{{item.price}}</span>                    
          </div>
          {% endif %}
 
@@ -124,11 +129,11 @@ body{
       
        
          
-      {% for category in menu_items %}
+      {% for category in bunker %}
       {% if category.created_by_id == 3 %}
   
       <h2 id="{{category}}" class="cateogery" style="left: 20px;padding-top: 50px;
-      margin-top: -25px;"> {{category}} </h2>
+      margin-top: -25px;"> {{category}}({{category.items_count}}) </h2>
       
       <div id="results"  class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
         
@@ -141,14 +146,14 @@ body{
               {%if item.type == 'NON-VEG' %}
               <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
               <div class="menu-content">
-                   <span style="background: var(--bg-color);;color: white;"> {{item.title}} </span> <span style="background: var(--bg-color);color: white;"> ₹{{item.price}}</span>
+                   <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);"> ₹{{item.price}}</span>
               
               </div>
               {% else %}
               
               <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
               <div class="menu-content">
-                <span style= "background: var(--bg-color);;color: white;  "> {{item.title}} </span> <span style="background: var(--bg-color);color: white;" > ₹{{item.price}}</span>                    
+                <span style= "background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);" > ₹{{item.price}}</span>                    
               </div>
               {% endif %}
 
@@ -181,11 +186,11 @@ body{
               <div id="dialog" style="display: none" ;>
 
                   <ul>
-                    {% for category in menu_items %}
+                    {% for category in bunker %}
                   {% if category.created_by_id == 3 %}
         
             
-                      <li><a href="#{{category}}">{{category}}</a></li>
+                      <li><a href="#{{category}}">{{category}}({{category.items_count}})</a></li>
 
                       {% endif %}
                       {% endfor %}

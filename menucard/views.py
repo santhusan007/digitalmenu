@@ -31,28 +31,25 @@ class MenuListView(ListView):
     model = Category
     template_name = 'menucard/home.html'
     context_object_name = 'menu_items'
-    # def get_context_data(self, **kwargs):
-    #     context= super().get_context_data(**kwargs)
-    #     context['details']=Item.objects.values('categories').annotate(num_books=Count('title'))
-    #     return context
+    
     
 class GlobalListView(ListView):
     model = Category
     template_name = 'menucard/globalbinge.html'
     context_object_name = 'menu_items'
-    # def get_context_data(self, **kwargs):
-    #     context= super().get_context_data(**kwargs)
-    #     context['details']=Category.objects.annotate(items_count=Count('item'))
-    #     return context
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['details']=Category.objects.annotate(items_count=Count('Category'))
+        return context
 
 class TheBunkerListView(ListView):
     model = Category
     template_name = 'menucard/thebunker.html'
     context_object_name = 'menu_items'
-    # def get_context_data(self, **kwargs):
-    #     context= super().get_context_data(**kwargs)
-    #     context['details']=Category.objects.annotate(items_count=Count('item'))
-    #     return context
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['bunker']=Category.objects.annotate(items_count=Count('Category'))
+        return context
 
     
 
