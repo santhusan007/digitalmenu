@@ -100,14 +100,16 @@ body{
          {%if item.type == 'NON-VEG' %}
          <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
          <div class="menu-content">
-              <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);"> ₹{{item.price}}</span>
+              <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);">
+                  {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
          
          </div>
          {% else %}
          
          <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
          <div class="menu-content">
-           <span style= "background: var(--bg-color);color: var(--my-color);  "> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);" > ₹{{item.price}}</span>                    
+           <span style= "background: var(--bg-color);color: var(--my-color);  "> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);" >
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>                    
          </div>
          {% endif %}
 
@@ -146,14 +148,16 @@ body{
               {%if item.type == 'NON-VEG' %}
               <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
               <div class="menu-content">
-                   <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);"> ₹{{item.price}}</span>
+                   <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);">
+                     {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
               
               </div>
               {% else %}
               
               <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
               <div class="menu-content">
-                <span style= "background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);" > ₹{{item.price}}</span>                    
+                <span style= "background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span style="background: var(--bg-color);color: var(--my-color);" > 
+                  {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>                    
               </div>
               {% endif %}
 
