@@ -761,6 +761,25 @@ h1, h2, h3, h4, h5, h6 {
   
 }
 
+.followMeBar {
+ 
+ 
+  position: relative;
+  z-index: 3;
+  
+}
+
+.followMeBar.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+.followMeBar.fixed.absolute {
+  position: absolute;
+}
 
 
   

@@ -85,7 +85,7 @@ body{
       </div>
 
       
-      <h2 class="cateogery" > RECOMMENDED </h2>
+      <div id="results"> <div class="cateogery"  > RECOMMENDED </div>
       {% for category in menu_items %}
       {% if category.created_by_id == 3 %}
       
@@ -128,16 +128,17 @@ body{
       {% endif %}
       
         {% endfor %}
+        </div>
       
        
          
       {% for category in bunker %}
       {% if category.created_by_id == 3 %}
   
-      <h2 id="{{category}}" class="cateogery" style="left: 20px;padding-top: 50px;
-      margin-top: -25px;"> {{category}}({{category.items_count}}) </h2>
+      <div id="results" > <div id="{{category}}"  class="cateogery" style="left: 20px;padding-top: 50px;
+        margin-top: -25px;"> {{category}}({{category.items_count}}) </div>
       
-      <div id="results"  class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
+      <div class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
         
         {% for item in category.get_products  %} 
               <div class="col-lg-6 menu-item filter-starters imageContainer">
@@ -174,6 +175,7 @@ body{
       {% endif %}
       {% endfor %}
      
+    </div>
     </div>
        
     </section><!-- End Menu Section -->
@@ -234,7 +236,7 @@ $("#btnShow").click(function () {
         open: function (event, ui) {
             setTimeout(function () {
                 $("#dialog").dialog("close");
-            }, 4000);
+            }, 6000);
         }
     });
 });
