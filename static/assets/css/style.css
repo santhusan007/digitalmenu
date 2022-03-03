@@ -722,11 +722,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .feedback {
-  background-color : #f30611;
+  background: white;
   color: black;
   padding: 10px 10px;
   border-radius: 25px;
-  border-color: #f30611;
+  border-color:rgba(0, 0, 0, 0);
   box-shadow: 1px 8px  #969696;
   -webkit-box-shadow: 1px 4px  #969696;
   z-index: 9;
