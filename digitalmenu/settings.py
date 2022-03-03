@@ -87,23 +87,23 @@ WSGI_APPLICATION = 'digitalmenu.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# DATABASES={
-#    'default':{
-#       'ENGINE':'django.db.backends.postgresql_psycopg2',
-#       'NAME':'d94l94uqpa07r8',
-#       'USER':'fmadpgwfrasyrt',
-#       'PASSWORD':'2ddb6ff26c4e949391a3afea9d9494b4fdec9e9761c2658a6c9ae8e6512634e9',
-#       'HOST':'ec2-54-161-238-249.compute-1.amazonaws.com',
-#       'PORT':'5432',
-#    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'d94l94uqpa07r8',
+      'USER':'fmadpgwfrasyrt',
+      'PASSWORD':'2ddb6ff26c4e949391a3afea9d9494b4fdec9e9761c2658a6c9ae8e6512634e9',
+      'HOST':'ec2-54-161-238-249.compute-1.amazonaws.com',
+      'PORT':'5432',
+   }
+}
 
 
 
