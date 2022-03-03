@@ -4,6 +4,104 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+
+
+
+$('#btnShow').click(function() {
+  $('#dialog').dialog('open');
+  closedialog = 0;
+ 
+});
+
+var closedialog;
+
+function overlayclickclose() {
+  if (closedialog) {
+      $('#dialog').dialog('close');
+  }
+
+  //set to one because click on dialog box sets to zero 
+  closedialog = 1;
+}
+
+$('#dialog').dialog({
+  autoOpen: false,
+  closeOnEscape:true,
+      modal: true,
+      title: "Menu",
+     width: 300,
+      height: 300,
+      position: { my: "bottom center", at: "center bottom ", of: window },
+  open: function() {
+    $(".ui-dialog-titlebar-close").hide();
+      closedialog = 1;
+      $(document).bind('click', overlayclickclose);
+  },
+  focus: function() {
+      closedialog = 0;
+  },
+  close: function() {
+      $(document).unbind('click');
+  },
+  
+});
+/*
+$(function () {
+$("#btnShow").click(function () {
+$("#dialog").dialog({
+  closeOnEscape:true,
+    modal: false,
+    title: "Menu",
+   width: 300,
+    height: 300,
+    position: { my: "bottom center", at: "center bottom ", of: window },
+    open: function (event, ui) {
+        setTimeout(function () {
+            $("#dialog").dialog("close");
+        }, 6000);
+    }
+});
+});
+});
+*/
+
+
+
+window.onload=function(){      
+$("#filter").keyup(function() {
+
+var filter = $(this).val(),
+count = 0;
+
+$('#results div').each(function() {
+
+if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+$(this).hide();
+
+} else {
+$(this).show();
+count++;
+}
+});
+});
+}
+
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+if (window.pageYOffset > sticky) {
+header.classList.add("sticky");
+} else {
+header.classList.remove("sticky");
+}
+}
+
+
+
+
 (function() {
   "use strict";
 
