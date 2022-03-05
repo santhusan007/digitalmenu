@@ -6,7 +6,9 @@
     <div class="container dark-grey-text">
       <div class="row wow fadeIn">
         <div class="col-md-6 mb-4">
+          {% if item.image %}
           <img src="{{ item.image.url }}" class="img-fluid mt-4" alt="">
+          {% endif %}
         </div>
         <div class="col-md-6 mb-4 information">
           <!--Content-->
@@ -21,7 +23,7 @@
               <h3>₹ {{ item.price }} </h3>
               
             </div>
-            <a href="{% url 'menucard:item_list'%}" class="btn btn-primary btn-md my-0 p">Go BBack to Items</a>
+            <a href="{% url 'menucard:item_list'%}" class="btn btn-primary btn-md my-0 p">Go Back to Items</a>
           </div>
         </div>
       </div>
