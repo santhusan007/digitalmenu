@@ -12,22 +12,26 @@
 
     </div>
   </div>
+  </div>
 
   <!-- ======= Header ======= -->
-
-
 
   <header id="header" class="fixed-top d-flex align-items-cente">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="{% url 'menucard:landing' %}">My Digital Menu</a></h1>
+      <h1 class="logo me-auto me-lg-0"><a href="{% url 'menucard:landing' %}">Digital Menu</a>
+      
+        <br><span style="font-size: small;"  >
+          {% if user.is_authenticated %}
+          Welcome {{user.username}}
+          {% endif %}
+        </span>
+      </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+      
       <nav id="navbar" class="navbar order-last order-lg-0">
-        {% if user.is_authenticated %}
-        logged as {{user.username}}
-        {% endif %}
+       
         <ul>
          <!-- {% if user.is_authenticated %}
             <li><a class="nav-link scrollto active" href="{% url 'menucard:item-create' %}">Create Item</a></li>
@@ -39,6 +43,9 @@
           {% if user.is_authenticated %}
           <li><a class="nav-link scrollto" href="{% url 'accounts:logout' %}">Logout</a></li>
           {% endif %}-->
+          
+
+
        {% if user.is_authenticated %}
           <li><a class="nav-link scrollto" href="/admin/logout">Logout</a></li>
           <li><a class="nav-link scrollto" href="/admin">Go to Items</a></li>
@@ -47,13 +54,56 @@
         {% endif %}
 
           <li><a class="nav-link scrollto" href="#menu">Contact</a></li>
-          
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       
 
     </div>
-  </header><!-- End Header -->
-
-
   
+
+  </header><!-- End Header -->
+  <br><br><br><br><br><br>
+
+   <!-- ======= Why Us Section ======= -->
+   <section id="why-us" class="why-us">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Why Us</h2>
+        <!--p>Why Choose Our Restaurant</p-->
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class="box" data-aos="zoom-in" data-aos-delay="100">
+            <span>01</span>
+            <h4>Dashboards</h4>
+            <p></p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+          <div class="box" data-aos="zoom-in" data-aos-delay="200">
+            <span>02</span>
+            <h4>SM  Management</h4>
+            <p> </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+          <div class="box" data-aos="zoom-in" data-aos-delay="300">
+            <span>03</span>
+            <h4> Web Devloepment </h4>
+            <p></p>
+          </div>
+        </div>
+
+      </div>
+
+    
+  </section><!-- End Why Us Section -->
+
+
 {% endblock content %}
