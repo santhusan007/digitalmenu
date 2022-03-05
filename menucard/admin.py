@@ -38,6 +38,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ItemAdmin(admin.ModelAdmin):
     view_on_site = False
     search_fields = ['title']
+    list_filter = ['categories']
     # readonly_fields= ["created_by"]
     list_per_page = sys.maxsize
     readonly_fields=["image_photo"]
