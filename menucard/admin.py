@@ -14,7 +14,6 @@ from django.utils.html import mark_safe
 class CategoryAdmin(admin.ModelAdmin):
     view_on_site = False
     list_display = ['title']
-    list_filter = ['title']
     search_fields = ['title']
     # readonly_fields = ["created_by"]
     list_per_page = sys.maxsize
@@ -38,7 +37,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ItemAdmin(admin.ModelAdmin):
     view_on_site = False
     search_fields = ['title']
-    list_filter = ['type','label','categories']
+    list_filter = ['label','categories']
     # readonly_fields= ["created_by"]
     list_per_page = sys.maxsize
     readonly_fields=["image_photo"]

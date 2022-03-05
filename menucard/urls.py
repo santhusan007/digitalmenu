@@ -10,8 +10,8 @@ urlpatterns = [
     
     path('',landing , name='landing'),
     path('hotel/',MenuListView.as_view() , name='menu'),
-    path('globalbinge/',GlobalListView.as_view() , name='globalmenu'),
-    path('thebunker/',TheBunkerListView.as_view() , name='thebunker'),
+    path('globalbingemenu/',GlobalListView.as_view() , name='globalmenu'),
+    path('thebunkermenu/',TheBunkerListView.as_view() , name='thebunker'),
     path('item/new/', ItemCreateView.as_view(), name='item-create'),
     path('dishes/<int:id>',menuDetail, name='dishes'),
     path('item-update/<int:pk>/', ItemUpdateView.as_view(), name='item-update'),
