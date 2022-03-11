@@ -1,4 +1,4 @@
-{% extends "menucard/base.html" %}
+﻿{% extends "menucard/base.html" %}
 
 {% block content %}
 
@@ -49,9 +49,8 @@
   <div class="container position-relative text-left text-lg-start" data-aos="zoom-in" data-aos-delay="100">
     <div class="row">
       <div class="col-lg-6 " style="margin-top: 15px;">
-        <h5> <span style="text-shadow: 2px 2px 4px #000000;">THE BUNKER</span></h5>
-        <div style="text-shadow: 2px 2px 4px #000000; font-size: 10px;padding-bottom: 15px;">Vandana Residency, Below
-          Lavanya Hall, Agashi, Virar West, 401301.</div>
+        <h5> <span style="text-shadow: 2px 2px 4px #000000;">THE BUNKER FAMILY DINING & BAR</span></h5>
+        <div style="text-shadow: 2px 2px 4px #000000; font-size: 10px;padding-bottom: 15px;">Padman Nagar, Agashi Road, Virar West.</div>
       </div>
 
     </div>
@@ -92,7 +91,7 @@
         {% for category in menu_items %}
         {% if category.created_by_id == 3 %}
 
-        <div id="results" class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
+        <div id="results" class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="100">
           {% for item in category.get_products %}
           {% if item.label %}
           <div class="col-lg-6 menu-item filter-starters imageContainer">
@@ -144,7 +143,7 @@
         <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
         margin-top: -25px;"> {{category}} ({{category.items_count}}) </div>
 
-        <div class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="200">
+        <div class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="100">
 
           {% for item in category.get_products %}
           <div class="col-lg-6 menu-item filter-starters imageContainer">
@@ -216,12 +215,13 @@
 
 
       <div>
-        <a href="https://wa.link/3unt79" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa"
+        <a href=https://wa.link/t40m2t" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa"
             style="z-index: 9" alt=""></a>
+
 
       </div>
       <div>
-        <a href="tel:+917306191467"> <img src="/static/assets/img/call.png" id="phone" style="z-index: 9" alt=""></a>
+        <a href="tel:+919370979590"> <img src="/static/assets/img/call.png" id="phone" style="z-index: 9" alt=""></a>
 
       </div>
     </div>
