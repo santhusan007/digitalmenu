@@ -101,7 +101,7 @@
       <div id="results">
         <div class="cateogery" data-aos="zoom-in" data-aos-delay="100" id="recommended"> RECOMMENDED </div>
         {% for category in menu_items %}
-        {% if category.created_by_id == 2 %}
+        
 
         <div class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="100">
 
@@ -142,7 +142,7 @@
 
         </div>
 
-        {% endif %}
+       
 
         {% endfor %}
       </div>
@@ -152,7 +152,7 @@
 
 
       {% for category in details %}
-      {% if category.created_by_id == 2 %}
+      
 
       <div id="results">
         <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
@@ -195,7 +195,7 @@
 
       </div>
 
-      {% endif %}
+      
       {% endfor %}
     </div>
 
@@ -217,12 +217,12 @@
         <ul style="list-style:square; color:var(--cat-color);">
           <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>
           {% for category in details %}
-          {% if category.created_by_id == 2 %}
+          
 
 
           <li><a href="#{{category}}">{{category}} <span style=" font-size: small;"><strong>({{category.items_count}})</strong></span></a></li>
 
-          {% endif %}
+          
           {% endfor %}
 
 
