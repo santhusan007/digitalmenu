@@ -36,10 +36,11 @@ class MenuListView(ListView):
 class GlobalListView(ListView):
     model = Category
     template_name = 'menucard/globalbinge.html'
-    context_object_name = 'menu_items'
+    #context_object_name = 'menu_items'
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
-        context['details']=Category.objects.filter(created_by_id=2).annotate(items_count=Count('Category')).order_by('id')
+        #context['details']=Category.objects.filter(created_by_id=2).annotate(items_count=Count('Category')).order_by('id')
+        context['details']=Category.objects.filter(created_by_id=2).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
         return context
 
 class TheBunkerListView(ListView):
@@ -48,7 +49,9 @@ class TheBunkerListView(ListView):
     context_object_name = 'menu_items'
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
-        context['bunker']=Category.objects.filter(created_by_id=3).annotate(items_count=Count('Category')).order_by('id')
+        #context['bunker']=Category.objects.filter(created_by_id=3).annotate(items_count=Count('Category')).order_by('id')
+        context['bunker']=Category.objects.filter(created_by_id=3).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
+
         return context
 
     

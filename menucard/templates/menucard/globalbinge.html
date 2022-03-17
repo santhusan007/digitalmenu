@@ -105,7 +105,7 @@
 
         <div class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="100">
 
-          {% for item in category.get_products %}
+          {% for item in category.Category.all %}
           {% if item.label %}
           <div class="col-lg-6 menu-item filter-starters imageContainer">
             {% if item.image %}
@@ -160,7 +160,7 @@
 
         <div class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="100">
 
-          {% for item in category.get_products %}
+          {% for item in category.Category.all %}
           <div class="col-lg-6 menu-item filter-starters imageContainer">
             {% if item.image %}
             <img src="{{item.image.url }}" class="menu-img largeimg" alt="">

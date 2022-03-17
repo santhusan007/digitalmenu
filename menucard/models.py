@@ -23,7 +23,7 @@ class Category(models.Model):
 
     @property
     def get_products(self):
-     return Item.objects.filter(categories__title=self.title)
+        return Item.objects.filter(categories__title=self.title)
 
 class Item(models.Model):
 
