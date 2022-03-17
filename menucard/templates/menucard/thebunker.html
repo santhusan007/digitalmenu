@@ -50,7 +50,8 @@
     <div class="row">
       <div class="col-lg-6 " style="margin-top: 15px;">
         <h5> <span style="text-shadow: 2px 2px 4px #000000;">THE BUNKER FAMILY DINING & BAR</span></h5>
-        <div style="text-shadow: 2px 2px 4px #000000; font-size: 10px;padding-bottom: 15px;">Padman Nagar, Agashi Road, Virar West.</div>
+        <div style="text-shadow: 2px 2px 4px #000000; font-size: 10px;padding-bottom: 15px;">Padman Nagar, Agashi Road,
+          Virar West.</div>
       </div>
 
     </div>
@@ -82,14 +83,14 @@
           </div>
         </div>
 
-        <p data-aos="zoom-in" data-aos-delay="100" > Menu</p>
+        <p data-aos="zoom-in" data-aos-delay="100"> Menu</p>
       </div>
 
 
       <div id="results">
         <div class="cateogery" data-aos="zoom-in" data-aos-delay="100" id="recommended"> RECOMMENDED </div>
-        {% for category in bunker %}
-        
+        {% for category in details %}
+
 
         <div id="results" class="row menu-container box-shadow" data-aos="fade-up" data-aos-delay="100">
           {% for item in category.Category.all %}
@@ -129,14 +130,14 @@
 
         </div>
 
-       
+
         {% endfor %}
       </div>
 
 
 
-      {% for category in bunker %}
-      
+      {% for category in details %}
+
 
       <div id="results">
         <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
@@ -178,17 +179,13 @@
 
         </div>
 
-        
+
         {% endfor %}
 
       </div>
     </div>
 
   </section><!-- End Menu Section -->
-
-
-
-
 
   <div class="myButtonContainer">
 
@@ -199,12 +196,13 @@
 
         <ul style="list-style:square; color:var(--my-color);">
           <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>
-          {% for category in bunker %}
-          
+          {% for category in details %}
 
 
-          <li><a href="#{{category}}">{{category}} <span style=" font-size: small;"><strong>({{category.items_count}})</strong></span></a></li>
-          
+
+          <li><a href="#{{category}}">{{category}} <span
+                style=" font-size: small;"><strong>({{category.items_count}})</strong></span></a></li>
+
           {% endfor %}
 
 
@@ -214,7 +212,7 @@
 
 
       <div>
-        <a href=https://wa.link/t40m2t" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa"
+        <a href="https://wa.link/t40m2t" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa"
             style="z-index: 9" alt=""></a>
 
 

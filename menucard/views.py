@@ -12,18 +12,14 @@ from django.db.models import Count
 
 # Create your views here.
 
-def landing(request):
-    
+def landing(request):    
     return render(request, 'menucard/landing.html')
-
-
 
 def menuDetail(request,id):
     item = Item.objects.filter(id=id).first()
     
     context = {
-        'item' : item,
-        
+        'item' : item,        
     }
     return render(request, 'menucard/dishes.html', context)
 
@@ -40,36 +36,38 @@ class GlobalListView(ListView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         #context['details']=Category.objects.filter(created_by_id=2).annotate(items_count=Count('Category')).order_by('id')
-        context['details']=Category.objects.filter(created_by_id=2).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
+        context['details']=Category.objects.filter(created_by_id=2)\
+                            .prefetch_related('Category')\
+                            .annotate(items_count=Count('Category'))\
+                            .order_by('id')
         return context
 
 class TheBunkerListView(ListView):
     model = Category
     template_name = 'menucard/thebunker.html'
-    context_object_name = 'menu_items'
+    #context_object_name = 'menu_items'
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         #context['bunker']=Category.objects.filter(created_by_id=3).annotate(items_count=Count('Category')).order_by('id')
-        context['bunker']=Category.objects.filter(created_by_id=3).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
+       #optimized the query using prefetch related funtion
+        context['details']=Category.objects.filter(created_by_id=3)\
+                            .prefetch_related('Category')\
+                            .annotate(items_count=Count('Category'))\
+                            .order_by('id')\
 
-        return context
-
-    
+        return context    
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     fields = ['title', 'image', 'description', 'price','type','categories', 'label']
-
         
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
-
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
     fields = ['title', 'image', 'description', 'price', 'label']
-   
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -92,16 +90,13 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 def item_list(request):
-
     if not request.user.is_authenticated:
-
             # Redirect them to the home page if not 
             return redirect('menucard:landing')
-
     else:
         items = Item.objects.filter(created_by=request.user)
         context = {
             'items':items
-        }
+                    }
     return render(request, 'menucard/item_list.html', context)
 
