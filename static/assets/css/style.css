@@ -16,7 +16,8 @@ html, body {
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #1c1f57;
+  background: #1a69ae
+;
   color: #fff;
 }
 
@@ -930,7 +931,8 @@ section {
 }
 
 .section-bg {
-  background-color: #1c1f57;
+  background-color: #1a69ae
+;
 }
 
 .section-title {
@@ -1242,7 +1244,8 @@ section {
 }
 
 .menu .menu-content span {
-  background: #1c1f57;
+  background: #1a69ae
+;
   position: relative;
   z-index: 3;
   padding: 0 10px;
