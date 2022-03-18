@@ -100,3 +100,6 @@ def item_list(request):
                     }
     return render(request, 'menucard/item_list.html', context)
 
+def error_404(request,exception=None):
+        data = {}
+        return render(request,'menucard/error_404.html', data)
