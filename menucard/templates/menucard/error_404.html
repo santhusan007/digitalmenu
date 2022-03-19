@@ -1,86 +1,75 @@
 {% extends "menucard/base.html" %}
 
 {% block content %}
-<style>
 
+ <!-- ======= Top Bar ======= -->
+ <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-phone d-flex align-items-center"><span>+91 7306191467</span></i>
+        
+
+    </div>
+  </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="{% url 'menucard:landing' %}">Digital Menu</a>
+      
+        <br><span style="font-size: small;"  >
+          {% if user.is_authenticated %}
+          Welcome {{user.username}}
+          {% endif %}
+        </span>
+      </h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      
+      <nav id="navbar" class="navbar order-last order-lg-0">
+       
+        <ul>
+         <!-- {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto active" href="{% url 'menucard:item-create' %}">Create Item</a></li>
+            <li><a class="nav-link scrollto active" href="{% url 'menucard:item_list' %}"> View Item</a></li>
+            {% endif %}
+            {% if not user.is_authenticated %}
+          <li><a class="nav-link scrollto active" href="{% url 'accounts:login' %}">Login</a></li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li><a class="nav-link scrollto" href="{% url 'accounts:logout' %}">Logout</a></li>
+          {% endif %}-->
+          
+
+
+       {% if user.is_authenticated %}
+          <li><a class="nav-link scrollto" href="/admin/logout">Logout</a></li>
+          <li><a class="nav-link scrollto" href="/admin">Go to Items</a></li>
+        {% else %}
+        <li><a class="nav-link scrollto" href="/admin">Login</a></li>
+        {% endif %}
+
+          <li><a class="nav-link scrollto" href="#menu">Contact</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      
+
+    </div>
   
-.wrapper {
-  width: 70%;
-  margin: 0 auto;
-}
-.notfound-page {
-  width: 100%;
-  float: left;
-  background-color: #1a69ae;
-  padding: 60px 15px;
-  text-align: center;
-  height: 100vh;
-}
-.notfound-page h4 {
-  color: #eaff72;
-  font-size: 200px;
-  letter-spacing: 10px;
-}
-.notfound-page h5 {
-  color: #fff;
-  font-size: 38px;
-  font-weight: normal;
-  letter-spacing: 3px;
-}
-.notfound-page p {
-  font-size: 15px;
-  color: #fff;
-  width: 80%;
-  margin: 15px auto 20px;
-  line-height: 22px;
-}
-.buttons {
-  margin-top: 40px;
-}
-.buttons a {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #3084ce;
-  padding: 10px 15px;
-  font-size: 18px;
-  border-radius: 4px;
-  margin: 10px 5px;
-  display: inline-block;
-  transition: 0.5s;
-}
-.buttons a:hover{
-background-color: #3599f1;
-}
-.buttons a i {
-  margin-right: 5px;
-}
 
+  </header><!-- End Header -->
+  <br><br><br><br><br><br>
 
-/*--Responsive CSS For Small Devices--*/
-@media (max-width: 1200px) {
-.notfound-page h1 {
-  font-size: 100px;
-}
-.wrapper {
-  width: 90%;
-}
-.notfound-page p {
-  width: 100%;
-}
-.notfound-page h5 {
-  font-size: 18px;
-}
-.buttons a {
-  padding: 8px 8px;
-  font-size: 15px;
-}
+   <!-- ======= Why Us Section ======= -->
+   <section id="why-us" class="why-us">
+    <div class="container" data-aos="fade-up">
 
-}
-
-</style>
-
-
-<h6>+91 7306191467</h6><div class="notfound-page">
+</h6><div class="notfound-page">
     <div class="wrapper">
       <h5>Ohh!! Receipe Not found</h5>
       <h5>Please check the address entered </h5>
