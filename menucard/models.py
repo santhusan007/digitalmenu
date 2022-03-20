@@ -24,7 +24,7 @@ class Category(models.Model):
     title = models.CharField(max_length=225)
     created_by = models.ForeignKey(User,on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    #hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
+    hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
     
     
 
@@ -64,7 +64,7 @@ class Item(models.Model):
     label = models.CharField(max_length=15, choices=LABELS, blank=True)
     #slug = models.SlugField(default="")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    #hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
+    hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
     
 
     def __str__(self):
