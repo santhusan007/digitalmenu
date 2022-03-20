@@ -137,3 +137,7 @@ def item_list(request):
 def error_404(request,exception=None):
         data = {}
         return render(request,'menucard/error_404.html', data)
+
+def error_500(request,exception=None):
+        data = {}
+        return render(request,'menucard/error_500.html', data)
