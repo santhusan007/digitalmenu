@@ -5,7 +5,7 @@ from django.shortcuts import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.views.generic import  ListView,CreateView,UpdateView,DeleteView
-from .models import Item,Category
+from .models import Item,Category,Hotel
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
@@ -27,35 +27,69 @@ class MenuListView(ListView):
     model = Category
     template_name = 'menucard/home.html'
     context_object_name = 'menu_items'
+
+
+def newMenuDisplay(request,header):
+    
+    hotel=Hotel.objects.get(header=header)
+    id=hotel.id
+    name= hotel.name
+    header=hotel.header
+    address=hotel.address
+    bgcolor= hotel.bgcolor
+    mycolor= hotel.mycolor
+    catcolor=hotel.catcolor
+    bgimage=hotel.bgimage
+    details=Category.objects.filter(created_by_id=id).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
+    
+    context= {
+        
+        "hotel":hotel,
+        "details":details ,
+         "name": name,
+        "header":header,
+        "address":address,
+        "bgcolor": bgcolor,
+        "mycolor": mycolor,
+        "catcolor":catcolor,
+        "bgimage":bgimage
+        }
+    print(bgcolor,mycolor,catcolor)
+
+    return render(request, 'menucard/newmenu.html', context)
+    
+    
     
     
 class GlobalListView(ListView):
-    model = Category
-    template_name = 'menucard/globalbinge.html'
-    #context_object_name = 'menu_items'
-    def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-        #context['details']=Category.objects.filter(created_by_id=2).annotate(items_count=Count('Category')).order_by('id')
-        context['details']=Category.objects.filter(created_by_id=2)\
-                            .prefetch_related('Category')\
-                            .annotate(items_count=Count('Category'))\
-                            .order_by('id')
-        return context
+    pass
+    # model = Category
+    # template_name = 'menucard/globalbinge.html'
+    # #context_object_name = 'menu_items'
+    # def get_context_data(self, **kwargs):
+    #     context= super().get_context_data(**kwargs)
+    #     #context['details']=Category.objects.filter(created_by_id=2).annotate(items_count=Count('Category')).order_by('id')
+    #     context['details']=Category.objects.filter(created_by_id=2)\
+    #                         .prefetch_related('Category')\
+    #                         .annotate(items_count=Count('Category'))\
+    #                         .order_by('id')
+    #     return context
 
 class TheBunkerListView(ListView):
-    model = Category
-    template_name = 'menucard/thebunker.html'
-    #context_object_name = 'menu_items'
-    def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-        #context['bunker']=Category.objects.filter(created_by_id=3).annotate(items_count=Count('Category')).order_by('id')
-       #optimized the query using prefetch related funtion
-        context['details']=Category.objects.filter(created_by_id=3)\
-                            .prefetch_related('Category')\
-                            .annotate(items_count=Count('Category'))\
-                            .order_by('id')\
+    pass
+    # model = Category
+    # template_name = 'menucard/thebunker.html'
+    # #context_object_name = 'menu_items'
+    # def get_context_data(self, **kwargs):
+    #     context= super().get_context_data(**kwargs)
+    #     #context['bunker']=Category.objects.filter(created_by_id=3).annotate(items_count=Count('Category')).order_by('id')
+    #    #optimized the query using prefetch related funtion
+    #     context['details']=Category.objects.filter(created_by_id=3)\
+    #                         .prefetch_related('Category')\
+    #                         .annotate(items_count=Count('Category'))\
+    #                         .order_by('id')\
 
-        return context    
+    #     return context    
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item

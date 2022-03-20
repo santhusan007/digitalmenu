@@ -7,11 +7,27 @@ from PIL import Image
 
 # Create your models here.
 
+class Hotel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,blank=True)
+    name= models.CharField(max_length=100,blank=True)
+    header=models.CharField(max_length=50,blank=True)
+    address=models.CharField(max_length=250,blank=True)
+    bgcolor= models.CharField(max_length=100,blank=True)
+    mycolor= models.CharField(max_length=100,blank=True)
+    catcolor=models.CharField(max_length=100,blank=True)
+    bgimage = models.ImageField(upload_to='images/',blank=True,null=True)
+
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     title = models.CharField(max_length=225)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, blank=True, null=True)
-   
+    #hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
+    
+    
+
     def __str__(self):
         return self.title
 
@@ -20,7 +36,7 @@ class Category(models.Model):
 
     @property
     def get_products(self):
-        return Item.objects.filter(categories__title=self.title)
+     return Item.objects.filter(categories__title=self.title)
 
 class Item(models.Model):
 
@@ -48,6 +64,8 @@ class Item(models.Model):
     label = models.CharField(max_length=15, choices=LABELS, blank=True)
     #slug = models.SlugField(default="")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    #hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
+    
 
     def __str__(self):
         return self.title
