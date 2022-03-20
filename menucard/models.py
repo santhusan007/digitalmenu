@@ -13,6 +13,8 @@ class Hotel(models.Model):
     header=models.CharField(max_length=50,blank=True)
     address=models.CharField(max_length=250,blank=True)
     bgcolor= models.CharField(max_length=100,blank=True)
+    mobile=models.CharField(max_length=100,blank=True)
+    whatsapplink=models.CharField(max_length=100,blank=True)
     mycolor= models.CharField(max_length=100,blank=True)
     catcolor=models.CharField(max_length=100,blank=True)
     bgimage = models.ImageField(upload_to='images/',blank=True,null=True)

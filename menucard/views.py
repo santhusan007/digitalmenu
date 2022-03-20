@@ -40,6 +40,8 @@ def newMenuDisplay(request,header):
     mycolor= hotel.mycolor
     catcolor=hotel.catcolor
     bgimage=hotel.bgimage
+    mobile=hotel.mobile
+    whatsapplink=hotel.whatsapplink
     details=Category.objects.filter(created_by_id=id).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
     
     context= {
@@ -52,7 +54,9 @@ def newMenuDisplay(request,header):
         "bgcolor": bgcolor,
         "mycolor": mycolor,
         "catcolor":catcolor,
-        "bgimage":bgimage
+        "bgimage":bgimage,
+        "mobile":mobile,
+        "whatsapplink":whatsapplink,
         }
     print(bgcolor,mycolor,catcolor)
 
