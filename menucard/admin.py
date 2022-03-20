@@ -31,9 +31,14 @@ class HotelAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
             if db_field.name == "user":
+                created_by=User.objects.all()
+                if not request.user.is_superuser:
+                        kwargs["queryset"] = User.objects.filter(username=request.user)
+                else:
+                        kwargs["queryset"] = created_by
                     # created_by=request.user
                     # if created_by:
-                    kwargs["queryset"] = User.objects.filter(username=request.user)
+                   
             
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
