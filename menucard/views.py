@@ -42,7 +42,7 @@ def newMenuDisplay(request,header):
     bgimage=hotel.bgimage
     mobile=hotel.mobile
     whatsapplink=hotel.whatsapplink
-    details=Category.objects.filter(created_by_id=id).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
+    details=Category.objects.filter(created_by_id=id,Category__active=True).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
     
     context= {
         

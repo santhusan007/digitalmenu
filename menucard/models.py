@@ -67,6 +67,7 @@ class Item(models.Model):
     #slug = models.SlugField(default="")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
+    active=models.BooleanField(default=True,blank=False)
     
 
     def __str__(self):

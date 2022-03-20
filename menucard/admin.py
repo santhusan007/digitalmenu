@@ -59,6 +59,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['title']
     # readonly_fields = ["created_by"]
     list_per_page = sys.maxsize
+    ordering=('id',)
 
     def get_queryset(self, request):
             qs = super().get_queryset(request)
@@ -97,7 +98,11 @@ class ItemAdmin(admin.ModelAdmin):
     # readonly_fields= ["created_by"]
     list_per_page = sys.maxsize
     readonly_fields=["image_photo"]
-    list_display = ['title','description','price']
+    list_display = ['title','description','active','price']
+    #list_editable = ('active',)
+    ordering = ('id', )
+    
+    
 
     # def image_tag(self, obj):
     #     return format_html('<img src="{}" width="200" height="100" />'.format(obj.image.url))
@@ -142,6 +147,7 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 # changing the admin site headder
+
 admin.site.index_title = "Menu Details"
 admin.site.site_header = "My Digital Menu"
 admin.site.site_title = "My Digital Menu"
