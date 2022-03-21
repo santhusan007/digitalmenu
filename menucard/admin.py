@@ -55,7 +55,7 @@ class HotelAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     view_on_site = False
-    list_display = ['title']
+    list_display = ['title','active']
     search_fields = ['title']
     # readonly_fields = ["created_by"]
     list_per_page = sys.maxsize

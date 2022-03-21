@@ -27,6 +27,10 @@ class Category(models.Model):
     created_by = models.ForeignKey(User,on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, blank=True, null=True)
     hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
+    active=models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Categories"
     
     
 
