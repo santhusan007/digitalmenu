@@ -17,6 +17,7 @@ class Hotel(models.Model):
     whatsapplink=models.CharField(max_length=100,blank=True)
     mycolor= models.CharField(max_length=100,blank=True)
     catcolor=models.CharField(max_length=100,blank=True)
+    bordercolor=models.CharField(max_length=100,blank=True)
     bgimage = models.ImageField(upload_to='images/',blank=True,null=True)
     message1=models.CharField(max_length=250,blank=True)
     message2=models.CharField(max_length=250,blank=True)
@@ -28,7 +29,7 @@ class Hotel(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=225)
     created_by = models.ForeignKey(User,on_delete=models.CASCADE)
-    slug = models.SlugField(unique=True, blank=True, null=True)
+    #slug = models.SlugField(unique=True, blank=True, null=True)
     hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
     active=models.BooleanField(default=True)
 

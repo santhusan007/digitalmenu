@@ -39,6 +39,7 @@ def newMenuDisplay(request,header):
     bgcolor= hotel.bgcolor
     mycolor= hotel.mycolor
     catcolor=hotel.catcolor
+    bordercolor=hotel.bordercolor
     bgimage=hotel.bgimage
     mobile=hotel.mobile
     whatsapplink=hotel.whatsapplink
@@ -56,6 +57,7 @@ def newMenuDisplay(request,header):
         "bgcolor": bgcolor,
         "mycolor": mycolor,
         "catcolor":catcolor,
+        "bordercolor":bordercolor,
         "bgimage":bgimage,
         "mobile":mobile,
         "whatsapplink":whatsapplink,

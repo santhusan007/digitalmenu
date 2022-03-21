@@ -9,6 +9,7 @@
     --bg-color:{{ bgcolor }} !IMPORTANT ;
     --my-color:{{ mycolor }} !IMPORTANT ;
     --cat-color:{{ catcolor }} !IMPORTANT;
+    --border-color:{{ bordercolor }} !IMPORTANT;
 
   }
 
@@ -42,8 +43,8 @@
 
   .box-shadow {
     background: var(--bg-color);
-    box-shadow: 1px 4px #969696;
-    -webkit-box-shadow: 1px 4px #969696;
+    box-shadow: 1px 4px var(--border-color);
+    -webkit-box-shadow: 1px 4px var(--border-color);
 
   }
 </style>
@@ -243,7 +244,7 @@ padding: 0; " class="d-flex align-items-center">
   <br><br>
 
   <!-- Vendor JS Files -->
-
+<!-- serch function -->
 
   <script type="text/javascript">
     window.onload = function () {
@@ -266,7 +267,7 @@ padding: 0; " class="d-flex align-items-center">
     }
   </script>
 
-
+  <!-- browse menu bottom button -->
   <script>
     $('#btnShow').click(function () {
       $('#dialog').dialog('open');
@@ -327,7 +328,7 @@ $("#btnShow").click(function () {
 });
 });
 </script-->
-
+<!-- stick search bar-->
   <script>
     window.onscroll = function () { myFunction() };
 
