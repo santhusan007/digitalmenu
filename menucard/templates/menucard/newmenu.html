@@ -30,6 +30,11 @@
     background-color: var(--bg-color);
   }
 
+  .cateogery{
+  color: var(--cat-color);
+  font-size: 20px;
+}
+
   .menu .menu-content span {
     background: var(--bg-color);
   }
@@ -231,11 +236,35 @@ padding: 0; " class="d-flex align-items-center">
       </div>
     </div>
   </div>
+  <p class="ml-3">{{message1}}</p>
+  <p class="ml-3">{{message2}}</p>
   <br>
   <br>
   <br><br>
 
   <!-- Vendor JS Files -->
+
+
+  <script type="text/javascript">
+    window.onload = function () {
+      $("#filter").keyup(function () {
+
+        var filter = $(this).val(),
+          count = 0;
+
+        $('#results div').each(function () {
+
+          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+            $(this).hide();
+
+          } else {
+            $(this).show();
+            count++;
+          }
+        });
+      });
+    }
+  </script>
 
 
   <script>
@@ -298,28 +327,6 @@ $("#btnShow").click(function () {
 });
 });
 </script-->
-
-
-  <script type="text/javascript">
-    window.onload = function () {
-      $("#filter").keyup(function () {
-
-        var filter = $(this).val(),
-          count = 0;
-
-        $('#results div').each(function () {
-
-          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-            $(this).hide();
-
-          } else {
-            $(this).show();
-            count++;
-          }
-        });
-      });
-    }
-  </script>
 
   <script>
     window.onscroll = function () { myFunction() };

@@ -60,6 +60,7 @@ class CategoryAdmin(admin.ModelAdmin):
     # readonly_fields = ["created_by"]
     list_per_page = sys.maxsize
     ordering=('id',)
+    list_editable = ('active',)
 
     def get_queryset(self, request):
             qs = super().get_queryset(request)
@@ -99,7 +100,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_per_page = sys.maxsize
     readonly_fields=["image_photo"]
     list_display = ['title','description','active','price']
-    #list_editable = ('active',)
+    list_editable = ('active',)
     ordering = ('id', )
     
     
