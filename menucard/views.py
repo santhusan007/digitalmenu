@@ -9,6 +9,7 @@ from .models import Item,Category,Hotel
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.views.decorators.cache import cache_page
 
 # Create your views here.
 
@@ -28,9 +29,8 @@ class MenuListView(ListView):
     template_name = 'menucard/home.html'
     context_object_name = 'menu_items'
 
-
-def newMenuDisplay(request,header):
-    
+@cache_page(0)
+def newMenuDisplay(request,header):    
     hotel=Hotel.objects.get(header=header)
     id=hotel.id
     name= hotel.name
