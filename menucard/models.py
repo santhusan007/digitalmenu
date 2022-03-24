@@ -19,6 +19,7 @@ class Hotel(models.Model):
     catcolor=models.CharField(max_length=100,blank=True)
     bordercolor=models.CharField(max_length=100,blank=True)
     bgimage = models.ImageField(upload_to='images/',blank=True,null=True)
+    pureveg=models.BooleanField(default=True)
     message1=models.CharField(max_length=250,blank=True)
     message2=models.CharField(max_length=250,blank=True)
 

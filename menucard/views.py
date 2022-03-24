@@ -8,7 +8,7 @@ from django.views.generic import  ListView,CreateView,UpdateView,DeleteView
 from .models import Item,Category,Hotel
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count,Q
 from django.views.decorators.cache import cache_page
 
 # Create your views here.
@@ -29,7 +29,7 @@ class MenuListView(ListView):
     template_name = 'menucard/home.html'
     context_object_name = 'menu_items'
 
-@cache_page(0)
+#@cache_page(0)
 def newMenuDisplay(request,header):    
     hotel=Hotel.objects.get(header=header)
     id=hotel.id
@@ -44,65 +44,57 @@ def newMenuDisplay(request,header):
     mobile=hotel.mobile
     whatsapplink=hotel.whatsapplink
     message1=hotel.message1
-    message2=hotel.message2
-    details=Category.objects.filter(created_by_id=id,active=True,Category__active=True).prefetch_related('Category').annotate(items_count=Count('Category')).order_by('id')
-    
-    context= {
+    message2=hotel.message2    
+    check1 = Q(created_by_id=id)
+    check2=Q(active=True)
+    check3=Q(Category__active=True)        
+    pureveg=hotel.pureveg
+    if request.method=='POST':
+        type=request.POST.get("type")
+
+        if type == "VEG":  
+            details=Category.objects.filter(check1 & check2 & check3)\
+            .exclude(Q(Category__type__contains='NON'))\
+            .prefetch_related('Category').annotate(items_count=Count('Category'))\
+            .order_by('id')
+
+        elif type == "NON-VEG":
+            details=Category.objects.filter(check1 & check2 & check3)\
+            .exclude(Q(Category__type__startswith='VEG'))\
+            .prefetch_related('Category').annotate(items_count=Count('Category'))\
+            .order_by('id')
+
+        else :
+            details=Category.objects.filter(check1 & check2 & check3)\
+            .prefetch_related('Category').annotate(items_count=Count('Category'))\
+            .order_by('id')
         
-        "hotel":hotel,
-        "details":details ,
-         "name": name,
-        "header":header,
-        "address":address,
-        "bgcolor": bgcolor,
-        "mycolor": mycolor,
-        "catcolor":catcolor,
-        "bordercolor":bordercolor,
-        "bgimage":bgimage,
-        "mobile":mobile,
-        "whatsapplink":whatsapplink,
-        "message1":message1,
-        "message2":message2,
+        context= {
+            
+            "hotel":hotel,"details":details,"name": name,"header":header,
+            "address":address,"bgcolor": bgcolor,"mycolor": mycolor,
+            "catcolor":catcolor,"bordercolor":bordercolor,
+            "bgimage":bgimage,"mobile":mobile,"whatsapplink":whatsapplink,
+            "message1":message1,"message2":message2,"pureveg":pureveg,
+            }
+        return render(request, 'menucard/newmenu.html', context)
 
-
-        }
-    #print(bgcolor,mycolor,catcolor)
-
-    return render(request, 'menucard/newmenu.html', context)
     
-    
-    
-    
-class GlobalListView(ListView):
-    pass
-    # model = Category
-    # template_name = 'menucard/globalbinge.html'
-    # #context_object_name = 'menu_items'
-    # def get_context_data(self, **kwargs):
-    #     context= super().get_context_data(**kwargs)
-    #     #context['details']=Category.objects.filter(created_by_id=2).annotate(items_count=Count('Category')).order_by('id')
-    #     context['details']=Category.objects.filter(created_by_id=2)\
-    #                         .prefetch_related('Category')\
-    #                         .annotate(items_count=Count('Category'))\
-    #                         .order_by('id')
-    #     return context
+    else :
+        details=Category.objects.filter(check1 & check2 & check3)\
+        .prefetch_related('Category').annotate(items_count=Count('Category'))\
+        .order_by('id')
+        context= {
+            
+            "hotel":hotel,"details":details,"name": name,"header":header,
+            "address":address,"bgcolor": bgcolor,"mycolor": mycolor,
+            "catcolor":catcolor,"bordercolor":bordercolor,
+            "bgimage":bgimage,"mobile":mobile,"whatsapplink":whatsapplink,
+            "message1":message1,"message2":message2,"pureveg":pureveg,
+            }
 
-class TheBunkerListView(ListView):
-    pass
-    # model = Category
-    # template_name = 'menucard/thebunker.html'
-    # #context_object_name = 'menu_items'
-    # def get_context_data(self, **kwargs):
-    #     context= super().get_context_data(**kwargs)
-    #     #context['bunker']=Category.objects.filter(created_by_id=3).annotate(items_count=Count('Category')).order_by('id')
-    #    #optimized the query using prefetch related funtion
-    #     context['details']=Category.objects.filter(created_by_id=3)\
-    #                         .prefetch_related('Category')\
-    #                         .annotate(items_count=Count('Category'))\
-    #                         .order_by('id')\
-
-    #     return context    
-
+        return render(request, 'menucard/newmenu.html', context)
+   
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     fields = ['title', 'image', 'description', 'price','type','categories', 'label']
@@ -140,6 +132,8 @@ def item_list(request):
             # Redirect them to the home page if not 
             return redirect('menucard:landing')
     else:
+        # hotels=Hotel.objects.get(user=request.user)
+        # hotel_id=hotels.id
         items = Item.objects.filter(created_by=request.user)
         context = {
             'items':items

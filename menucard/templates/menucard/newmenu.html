@@ -56,6 +56,20 @@
     color: var(--my-color);
 
   }
+  .btn:active {
+            background-color: orange;
+            box-shadow: 0 5px gray;
+            transform: translateY(2px);
+         }
+
+.btn-sm  {
+
+
+ padding-top: .15rem;
+ padding-left: .15rem;
+ padding-right: .15rem;
+ padding-bottom: .15rem;
+}
 
 </style>
 
@@ -103,10 +117,26 @@ padding: 0; " class="d-flex align-items-center">
           </div>
         </div>
 
-        <p data-aos="zoom-in" data-aos-delay="100" > Menu</p>
+        <p data-aos="zoom-in" data-aos-delay="100"> Menu</p>
+
+        {% if pureveg %}
+        <!-- <span style="color: var(--my-color);" data-aos="zoom-in" data-aos-delay="100"> -->
+          <!-- Pure veg -->
+          <button  style="color: var(--my-color)" id="btnSuccess" data-aos="zoom-in" data-aos-delay="100" class="btn btn-success btn-sm " >Veg Only</button> 
+       
+
+        {% else %}
+
+        <form action="" method="POST" >
+          {% csrf_token %}
+         <button id="btnWarning" data-aos="zoom-in" data-aos-delay="100" type="submit" class="btn btn-warning btn-sm "  value="All" name="type">All</button> 
+         <button id="btnSuccess" data-aos="zoom-in" data-aos-delay="100" type="submit" class="btn btn-success btn-sm"  value="VEG" name="type">Veg</button> 
+          <button id="btnDanger" data-aos="zoom-in" data-aos-delay="100" type="submit" class="btn btn-danger btn-sm "  value="NON-VEG" name="type">Non</button>
+      </form>  
+      {% endif %}
       </div>
 
-      
+             
       <div id="results">
         <div class="cateogery" data-aos="zoom-in" data-aos-delay="100" id="recommended"> RECOMMENDED </div>
         {% for category in details %}
@@ -120,13 +150,15 @@ padding: 0; " class="d-flex align-items-center">
             <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
 
             {% endif %}
+            
             {%if item.type == 'NON-VEG' %}
-            <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+            <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
             <div class="menu-content">
+             
               <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
                 style="background: var(--bg-color);color: var(--my-color);">
                 {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-
+              
             </div>
             {% else %}
 
@@ -159,7 +191,6 @@ padding: 0; " class="d-flex align-items-center">
 
       {% for category in details %}
       
-
       <div id="results">
         <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
         margin-top: -25px;"> {{category}} ({{category.items_count}}) </div>
@@ -173,8 +204,9 @@ padding: 0; " class="d-flex align-items-center">
 
             {% endif %}
             {%if item.type == 'NON-VEG' %}
-            <i class="bi bi-stop-btn" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
-            <div class="menu-content">
+            
+            <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+            <div class="menu-content non-veg">
               <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
                 style="background: var(--bg-color);color: var(--my-color);">
                 {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
@@ -182,8 +214,8 @@ padding: 0; " class="d-flex align-items-center">
             </div>
             {% else %}
 
-            <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
-            <div class="menu-content">
+            <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
+            <div class="menu-content veg">
               <span style="background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span
                 style="background: var(--bg-color);color: var(--my-color);">
                 {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
@@ -255,6 +287,22 @@ padding: 0; " class="d-flex align-items-center">
 
   <!-- Vendor JS Files -->
 <!-- serch function -->
+
+<script>
+ 
+var buttonClicked = null;
+function highlight(id) {
+    if(buttonClicked != null)
+    {
+        buttonClicked.style.background = "rgba(255,0,0,0.8)";
+    }
+
+    buttonClicked  = document.getElementById(id);
+    buttonClicked.style.background =  "rgba(255,0,0,0.6)";
+}
+
+</script>
+
 
   <script type="text/javascript">
     window.onload = function () {
