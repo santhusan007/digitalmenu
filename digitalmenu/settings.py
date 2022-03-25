@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['mymenudigi.herokuapp.com','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -158,12 +159,13 @@ AWS_S3_ADDRESSING_STYLE='virtual'
 AWS_S3_SIGNATURE_VERSION='s3v4'
 
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-#         'LOCATION': 'menu_cache',
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'menu_cache',
+        
+    }
+}
 
 
 

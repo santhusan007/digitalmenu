@@ -19,9 +19,11 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls import handler404,handler500
 from menucard import views
+import clearcache
 
 
 urlpatterns = [
+    path('admin/clearcache/',include('clearcache.urls')),
     path('admin/', admin.site.urls),
     path('',include('menucard.urls'),name='menucard'),
     path('accounts/', include('accounts.urls'),name='accounts'),
