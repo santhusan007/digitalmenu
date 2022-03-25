@@ -49,51 +49,51 @@ def newMenuDisplay(request,header):
     check2=Q(active=True)
     check3=Q(Category__active=True)        
     pureveg=hotel.pureveg
-    if request.method=='POST':
-        type=request.POST.get("type")
+    # if request.method=='POST':
+    #     type=request.POST.get("type")
 
-        if type == "VEG":  
-            details=Category.objects.filter(check1 & check2 & check3)\
-            .exclude(Q(Category__type__contains='NON'))\
-            .prefetch_related('Category').annotate(items_count=Count('Category'))\
-            .order_by('id')
+    #     if type == "VEG":  
+    #         details=Category.objects.filter(check1 & check2 & check3)\
+    #         .exclude(Q(Category__type__contains='NON'))\
+    #         .prefetch_related('Category').annotate(items_count=Count('Category'))\
+    #         .order_by('id')
 
-        elif type == "NON-VEG":
-            details=Category.objects.filter(check1 & check2 & check3)\
-            .exclude(Q(Category__type__startswith='VEG'))\
-            .prefetch_related('Category').annotate(items_count=Count('Category'))\
-            .order_by('id')
+    #     elif type == "NON-VEG":
+    #         details=Category.objects.filter(check1 & check2 & check3)\
+    #         .exclude(Q(Category__type__startswith='VEG'))\
+    #         .prefetch_related('Category').annotate(items_count=Count('Category'))\
+    #         .order_by('id')
 
-        else :
-            details=Category.objects.filter(check1 & check2 & check3)\
-            .prefetch_related('Category').annotate(items_count=Count('Category'))\
-            .order_by('id')
+    #     else :
+    #         details=Category.objects.filter(check1 & check2 & check3)\
+    #         .prefetch_related('Category').annotate(items_count=Count('Category'))\
+    #         .order_by('id')
         
-        context= {
+        # context= {
             
-            "hotel":hotel,"details":details,"name": name,"header":header,
-            "address":address,"bgcolor": bgcolor,"mycolor": mycolor,
-            "catcolor":catcolor,"bordercolor":bordercolor,
-            "bgimage":bgimage,"mobile":mobile,"whatsapplink":whatsapplink,
-            "message1":message1,"message2":message2,"pureveg":pureveg,
-            }
-        return render(request, 'menucard/newmenu.html', context)
+        #     "hotel":hotel,"details":details,"name": name,"header":header,
+        #     "address":address,"bgcolor": bgcolor,"mycolor": mycolor,
+        #     "catcolor":catcolor,"bordercolor":bordercolor,
+        #     "bgimage":bgimage,"mobile":mobile,"whatsapplink":whatsapplink,
+        #     "message1":message1,"message2":message2,"pureveg":pureveg,
+        #     }
+        # return render(request, 'menucard/newmenu.html', context)
 
     
-    else :
-        details=Category.objects.filter(check1 & check2 & check3)\
+    
+    details=Category.objects.filter(check1 & check2 & check3)\
         .prefetch_related('Category').annotate(items_count=Count('Category'))\
         .order_by('id')
-        context= {
+    context= {
             
-            "hotel":hotel,"details":details,"name": name,"header":header,
+        "hotel":hotel,"details":details,"name": name,"header":header,
             "address":address,"bgcolor": bgcolor,"mycolor": mycolor,
             "catcolor":catcolor,"bordercolor":bordercolor,
             "bgimage":bgimage,"mobile":mobile,"whatsapplink":whatsapplink,
             "message1":message1,"message2":message2,"pureveg":pureveg,
             }
 
-        return render(request, 'menucard/newmenu.html', context)
+    return render(request, 'menucard/newmenu.html', context)
    
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item

@@ -81,7 +81,7 @@ background-size: cover;
 position: relative;
 padding: 0; " class="d-flex align-items-center">
 
-  <div class="container position-relative text-left text-lg-start" data-aos="flip-down" data-aos-delay="100">
+  <div class="container position-relative text-left text-lg-start" data-aos="zoom-in" data-aos-delay="100">
     <div class="row">
       <div class="col-lg-6 " style="margin-top: 15px;">
         <h5> <span style="text-shadow: 2px 2px 4px #000000;">{{name}}</span></h5>
@@ -118,9 +118,11 @@ padding: 0; " class="d-flex align-items-center">
         </div>
 
         <p  id="recommended"> Menu</p>
+ {% comment %}
+   
  
         {% if pureveg %}
-        <!-- <span style="color: var(--my-color);" data-aos="flip-down" data-aos-delay="100"> -->
+        <!-- <span style="color: var(--my-color);" data-aos="zoom-in" data-aos-delay="100"> -->
           <!-- Pure veg -->
           <button  style="color: var(--my-color)" id="btnSuccess" class="btn btn-success btn-sm " >Veg Only</button> 
        
@@ -136,13 +138,13 @@ padding: 0; " class="d-flex align-items-center">
       {% endif %}
       </div>
 
-             
+      {% endcomment %}            
       <div id="results">
-        <div class="cateogery" data-aos="flip-down" data-aos-delay="100"> RECOMMENDED </div>
+        <div class="cateogery" data-aos="zoom-in" data-aos-delay="100"> RECOMMENDED </div>
         {% for category in details %}
       
 
-        <div id="results" class="row menu-container box-shadow" data-aos="flip-down" data-aos-delay="100">
+        <div id="results" class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
           {% for item in category.Category.all%}
           {% if item.label %}
           <div class="col-lg-6 menu-item filter-starters imageContainer">
@@ -192,10 +194,10 @@ padding: 0; " class="d-flex align-items-center">
       {% for category in details %}
       
       <div id="results">
-        <div id="{{category}}" class="cateogery" data-aos="flip-down" data-aos-delay="100" style="left: 20px;padding-top: 50px;
+        <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
         margin-top: -25px;"> {{category}} ({{category.items_count}}) </div>
 
-        <div class="row menu-container box-shadow" data-aos="flip-down" data-aos-delay="100">
+        <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
 
           {% for item in category.Category.all %}
           <div class="col-lg-6 menu-item filter-starters imageContainer">
