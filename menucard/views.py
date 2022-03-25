@@ -29,7 +29,7 @@ class MenuListView(ListView):
     template_name = 'menucard/home.html'
     context_object_name = 'menu_items'
 
-@cache_page(60*10080)
+#@cache_page(60*10080)
 def newMenuDisplay(request,header):    
     hotel=Hotel.objects.get(header=header)
     id=hotel.id
