@@ -64,7 +64,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
             qs = super().get_queryset(request)
-            if request.user.is_superuser or is_admingroup(request.user):
+            if request.user.is_superuser :
                 return qs
             return qs.filter(created_by=request.user)
 
@@ -73,13 +73,13 @@ class CategoryAdmin(admin.ModelAdmin):
                     # created_by=request.user
                     # if created_by:
                 created_by=User.objects.all()
-                if request.user.is_superuser or is_admingroup(request.user):
+                if request.user.is_superuser :
                      kwargs["queryset"] = created_by   
                 else:
                     kwargs["queryset"] = User.objects.filter(username=request.user)
             elif db_field.name == "hotel" :
                 hotel=Hotel.objects.all()   
-                if request.user.is_superuser or is_admingroup(request.user):
+                if request.user.is_superuser :
                     kwargs["queryset"]=hotel
                 else:
                     kwargs["queryset"] = Hotel.objects.filter(user=request.user)                   
@@ -113,7 +113,7 @@ class ItemAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser or is_admingroup(request.user):
+        if request.user.is_superuser :
             return qs
         return qs.filter(created_by=request.user)
 
@@ -121,21 +121,21 @@ class ItemAdmin(admin.ModelAdmin):
         
             if db_field.name == "created_by":
                 created_by=User.objects.all()
-                if  request.user.is_superuser or is_admingroup(request.user):
+                if  request.user.is_superuser :
                     kwargs["queryset"] = created_by                    
                 else:
                     kwargs["queryset"] = User.objects.filter(username=request.user)
             
             elif db_field.name == "categories":
                 categories=Category.objects.all()
-                if  request.user.is_superuser or is_admingroup(request.user):
+                if  request.user.is_superuser :
                     kwargs["queryset"]=categories                    
                 else:
                     kwargs["queryset"] = Category.objects.filter(created_by=request.user)
             
             elif db_field.name == "hotel" :
                 hotel=Hotel.objects.all()   
-                if request.user.is_superuser or is_admingroup(request.user):
+                if request.user.is_superuser :
                     kwargs["queryset"]=hotel                    
                 else:
                     kwargs["queryset"] = Hotel.objects.filter(user=request.user)
