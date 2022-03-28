@@ -6,10 +6,10 @@
 
   
   :root {
-    --bg-color:{{ bgcolor }} !IMPORTANT ;
-    --my-color:{{ mycolor }} !IMPORTANT ;
-    --cat-color:{{ catcolor }} !IMPORTANT;
-    --border-color:{{ bordercolor }} !IMPORTANT;
+    --bg-color:{{ hotel.bgcolor }} !IMPORTANT ;
+    --my-color:{{ hotel.mycolor }} !IMPORTANT ;
+    --cat-color:{{ hotel.catcolor }} !IMPORTANT;
+    --border-color:{{ hotel.bordercolor }} !IMPORTANT;
 
   }
 
@@ -74,7 +74,7 @@
 </style>
 
 
-<section id="hero"  style="background: url('{{bgimage.url}}')  top center;width: 100%;
+<section id="hero"  style="background: url('{{hotel.bgimage.url}}')  top center;width: 100%;
 height: 30vh;    
 filter: brightness(180%);
 background-size: cover;
@@ -84,80 +84,78 @@ padding: 0; " class="d-flex align-items-center">
   <div class="container position-relative text-left text-lg-start" data-aos="zoom-in" data-aos-delay="100">
     <div class="row">
       <div class="col-lg-6 " style="margin-top: 15px;">
-        <h5> <span style="text-shadow: 2px 2px 4px #000000;">{{name}}</span></h5>
-        <div style="text-shadow: 2px 2px 4px #000000; font-size: 10px;padding-bottom: 15px;">{{address}}</div>
+        <h5> <span style="text-shadow: 2px 2px 4px #000000;">{{hotel.name}}</span></h5>
+        <div style="text-shadow: 2px 2px 4px #000000; font-size: 10px;padding-bottom: 15px;">{{hotel.address}}</div>
       </div>
 
     </div>
   </div>
 </section><!-- End Hero data-aos="fade-up" data-aos-delay="200" -->
-
-
   <!-- ======= Menu Section ======= -->
-
-
-
   <section id="menu" class="menu section-bg">
     <div class="container">
 
       <div class="section-title ">
-
-
         <div class="header" id="myHeader" style="width: 60%;float: right; overflow: hidden ">
-
           <div class="sb-example-1">
             <div class="search">
               <input id="filter" type="text" class="searchTerm" placeholder="What are you looking for?">
               <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
+                <i class="fa fa-search" style="color: lightgrey;"></i>
               </button>
-
-
             </div>
           </div>
         </div>
-
         <p  id="recommended"> Menu</p>
- {% comment %}
-   
- 
+{% comment %}
+  
+
         {% if pureveg %}
         <!-- <span style="color: var(--my-color);" data-aos="zoom-in" data-aos-delay="100"> -->
           <!-- Pure veg -->
           <button  style="color: var(--my-color)" id="btnSuccess" class="btn btn-success btn-sm " >Veg Only</button> 
-       
+     {% else %}
 
-        {% else %}
-
-        <form action="" method="POST" >
-          {% csrf_token %}
-         <button id="btnWarning"  type="submit" class="btn btn-warning btn-sm "  value="All" name="type">All</button> 
-         <button id="btnSuccess"  type="submit" class="btn btn-success btn-sm"  value="VEG" name="type">Veg</button> 
-          <button id="btnDanger"  type="submit" class="btn btn-danger btn-sm "  value="NON-VEG" name="type">Non</button>
+      <form action="" method="POST" >
+          {% csrf_token %}         
+          {% if types == 'All' %}
+         <button id="All"  type="submit" class="btn btn-warning btn-sm active " style="border-radius: 50%;box-shadow:0 4px #d39e00"  value="All" name="type" >&nbsp;all&nbsp;</button> 
+         {% else %}
+   
+         <button id="All"  type="submit" class="btn btn-light btn-sm " style="border-radius: 50%;box-shadow: 0px 4px  #ccc"  value="All" name="type">&nbsp;all&nbsp;</button>
+         {% endif %} 
+        
+         {% if types == 'VEG' %}
+         
+         <button id="veg"  type="submit" class="btn btn-success btn-sm active" style="border-radius: 50%;box-shadow: 0px 4px #1e7e34"   value="VEG" name="type">veg</button> 
+         {% else %}
+         <button id="veg"  type="submit" class="btn btn-light btn-sm" style="border-radius: 50%;box-shadow: 0px 4px  #ccc"  value="VEG" name="type">veg</button> 
+         {% endif %} 
+         {% if types == 'NON-VEG' %}
+          <button id="non-veg"  type="submit" class="btn btn-danger btn-sm active" style="border-radius: 50%;box-shadow: 0px 4px  #bd2130"   value="NON-VEG" name="type">non</button>
+          {% else %}
+          <button id="non-veg"  type="submit" class="btn btn-light btn-sm " style="border-radius: 50%;box-shadow: 0px 4px  #ccc"  value="NON-VEG" name="type">non</button>
+          {% endif %} 
       </form>  
+
       {% endif %}
+      {% endcomment %}
       </div>
-
-      {% endcomment %}            
-      <div id="results">
-        <div class="cateogery" data-aos="zoom-in" data-aos-delay="100"> RECOMMENDED </div>
-        {% for category in details %}
       
-
-        <div id="results" class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
+      <div id="results">
+        <div class="cateogery" data-aos="zoom-in" data-aos-delay="100"> {{hotel.specialheading}} </div>
+        {% for category in details %}
+      <div id="results" class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
           {% for item in category.Category.all%}
           {% if item.label %}
           <div class="col-lg-6 menu-item filter-starters imageContainer">
             {% if item.image %}
             <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
-
             {% endif %}
-            
-            {%if item.type == 'NON-VEG' %}
+           {%if item.type == 'NON-VEG' %}
             <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
             <div class="menu-content">
-             
-              <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
+            <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
                 style="background: var(--bg-color);color: var(--my-color);">
                 {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
               
@@ -178,25 +176,16 @@ padding: 0; " class="d-flex align-items-center">
 
           </div>
           {% endif %}
-
           {% endfor %}
-
-
         </div>
-
-        
-
         {% endfor %}
       </div>
-
-
-
       {% for category in details %}
-      
+     
       <div id="results">
         <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
-        margin-top: -25px;"> {{category}} ({{category.items_count}}) </div>
-
+        margin-top: -25px;"> {{category}}</div>
+        <!-- {{category}} ({{category.items_count}}) </div> -->
         <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
 
           {% for item in category.Category.all %}
@@ -241,57 +230,40 @@ padding: 0; " class="d-flex align-items-center">
     </div>
 
   </section><!-- End Menu Section -->
-
-
-
-
-
   <div class="myButtonContainer">
-
     <div id="mybutton" style="z-index: 9">
       <!--button class="feedback toggle">Browse Menu</button-->
       <input class="feedback" type="button" id="btnShow" style="z-index: 9" value="Browse Menu" />
       <div id="dialog" style="display: none" ;>
-
         <ul style="list-style:square; color:var(--my-color);">
           <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>
           {% for category in details %}
-          
-
-
+       
           <li><a href="#{{category}}">{{category}} <span style=" font-size: small;"><strong>({{category.items_count}})</strong></span></a></li>
           
           {% endfor %}
-
-
         </ul>
       </div>
-
-
-
       <div>
-        <a href="{{whatsapplink}}" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa"
+        <a href="{{hotel.whatsapplink}}" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa"
             style="z-index: 9" alt=""></a>
-
-
       </div>
       <div>
-        <a href="tel:{{mobile}}"> <img src="/static/assets/img/call.png" id="phone" style="z-index: 9" alt=""></a>
+        <a href="tel:{{hotel.mobile}}"> <img src="/static/assets/img/call.png" id="phone" style="z-index: 9" alt=""></a>
 
       </div>
     </div>
   </div>
-  <p class="ml-3">{{message1}}</p>
-  <p class="ml-3">{{message2}}</p>
+  <p class="ml-3">{{hotel.message1}}</p>
+  <p class="ml-3">{{hotel.message2}}</p>
   <br>
   <br>
   <br><br>
 
   <!-- Vendor JS Files -->
 <!-- serch function -->
-
 <script>
- 
+
 var buttonClicked = null;
 function highlight(id) {
     if(buttonClicked != null)
@@ -305,19 +277,14 @@ function highlight(id) {
 
 </script>
 
-
-  <script type="text/javascript">
+<script type="text/javascript">
     window.onload = function () {
       $("#filter").keyup(function () {
-
         var filter = $(this).val(),
           count = 0;
-
         $('#results div').each(function () {
-
           if ($(this).text().search(new RegExp(filter, "i")) < 0) {
             $(this).hide();
-
           } else {
             $(this).show();
             count++;
@@ -328,24 +295,19 @@ function highlight(id) {
   </script>
 
   <!-- browse menu bottom button -->
-  <script>
+<script>
     $('#btnShow').click(function () {
       $('#dialog').dialog('open');
       closedialog = 0;
-
     });
-
     var closedialog;
-
     function overlayclickclose() {
       if (closedialog) {
         $('#dialog').dialog('close');
       }
-
       //set to one because click on dialog box sets to zero 
       closedialog = 1;
-    }
-
+  }
     $('#dialog').dialog({
       autoOpen: false,
       closeOnEscape: true,
@@ -367,28 +329,8 @@ function highlight(id) {
       },
 
     });
-  </script>
- 
+</script>
 
-  <!--script type="text/javascript">
-$(function () {
-$("#btnShow").click(function () {
-    $("#dialog").dialog({
-      closeOnEscape:true,
-        modal: false,
-        title: "Menu",
-       width: 300,
-        height: 300,
-        position: { my: "bottom center", at: "center bottom ", of: window },
-        open: function (event, ui) {
-            setTimeout(function () {
-                $("#dialog").dialog("close");
-            }, 6000);
-        }
-    });
-});
-});
-</script-->
 <!-- stick search bar-->
   <script>
     window.onscroll = function () { myFunction() };
@@ -404,8 +346,4 @@ $("#btnShow").click(function () {
       }
     }
   </script>
-
-
-
-
-  {% endblock content %}
+{% endblock content %}

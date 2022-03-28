@@ -17,11 +17,8 @@ def landing(request):
     return render(request, 'menucard/landing.html')
 
 def menuDetail(request,id):
-    item = Item.objects.filter(id=id).first()
-    
-    context = {
-        'item' : item,        
-    }
+    item = Item.objects.filter(id=id).first()    
+    context = {'item' : item, }
     return render(request, 'menucard/dishes.html', context)
 
 class MenuListView(ListView):
@@ -32,68 +29,37 @@ class MenuListView(ListView):
 #@cache_page(60*10080)
 def newMenuDisplay(request,header):    
     hotel=Hotel.objects.get(header=header)
-    id=hotel.id
-    name= hotel.name
-    header=hotel.header
-    address=hotel.address
-    bgcolor= hotel.bgcolor
-    mycolor= hotel.mycolor
-    catcolor=hotel.catcolor
-    bordercolor=hotel.bordercolor
-    bgimage=hotel.bgimage
-    mobile=hotel.mobile
-    whatsapplink=hotel.whatsapplink
-    message1=hotel.message1
-    message2=hotel.message2    
-    check1 = Q(created_by_id=id)
+    check1 = Q(created_by_id=hotel.id)
     check2=Q(active=True)
-    check3=Q(Category__active=True)        
-    pureveg=hotel.pureveg
-    # if request.method=='POST':
-    #     type=request.POST.get("type")
-
-    #     if type == "VEG":  
-    #         details=Category.objects.filter(check1 & check2 & check3)\
-    #         .exclude(Q(Category__type__contains='NON'))\
-    #         .prefetch_related('Category').annotate(items_count=Count('Category'))\
-    #         .order_by('id')
-
-    #     elif type == "NON-VEG":
-    #         details=Category.objects.filter(check1 & check2 & check3)\
-    #         .exclude(Q(Category__type__startswith='VEG'))\
-    #         .prefetch_related('Category').annotate(items_count=Count('Category'))\
-    #         .order_by('id')
-
-    #     else :
-    #         details=Category.objects.filter(check1 & check2 & check3)\
-    #         .prefetch_related('Category').annotate(items_count=Count('Category'))\
-    #         .order_by('id')
-        
-        # context= {
-            
-        #     "hotel":hotel,"details":details,"name": name,"header":header,
-        #     "address":address,"bgcolor": bgcolor,"mycolor": mycolor,
-        #     "catcolor":catcolor,"bordercolor":bordercolor,
-        #     "bgimage":bgimage,"mobile":mobile,"whatsapplink":whatsapplink,
-        #     "message1":message1,"message2":message2,"pureveg":pureveg,
-        #     }
-        # return render(request, 'menucard/newmenu.html', context)
+    check3=Q(Category__active=True)     
 
     
-    
-    details=Category.objects.filter(check1 & check2 & check3)\
-        .prefetch_related('Category').annotate(items_count=Count('Category'))\
-        .order_by('id')
-    context= {
-            
-        "hotel":hotel,"details":details,"name": name,"header":header,
-            "address":address,"bgcolor": bgcolor,"mycolor": mycolor,
-            "catcolor":catcolor,"bordercolor":bordercolor,
-            "bgimage":bgimage,"mobile":mobile,"whatsapplink":whatsapplink,
-            "message1":message1,"message2":message2,"pureveg":pureveg,
-            }
+    if request.method=='POST':
+        types=request.POST.get("type")
+        if types == "VEG":  
+            print(types)
+            details=Category.objects.filter(check1 & check2 & check3)\
+            .exclude(Q(Category__type__contains='NON'))\
+            .prefetch_related('Category').annotate(items_count=Count('Category'))\
+            .order_by('id')
+        elif types == "NON-VEG":
+            details=Category.objects.filter(check1 & check2 & check3)\
+            .exclude(Q(Category__type__startswith='VEG'))\
+            .prefetch_related('Category').annotate(items_count=Count('Category'))\
+            .order_by('id')
+        else :
+            details=Category.objects.filter(check1 & check2 & check3)\
+            .prefetch_related('Category').annotate(items_count=Count('Category'))\
+            .order_by('id')        
+        context= {"hotel":hotel,"details":details,"types":types }
+        return render(request, 'menucard/newmenu.html', context)    
+    else:
+        details=Category.objects.filter(check1 & check2 & check3)\
+                .prefetch_related('Category').annotate(items_count=Count('Category'))\
+                .order_by('id')
+        context= {"hotel":hotel,"details":details,}
 
-    return render(request, 'menucard/newmenu.html', context)
+        return render(request, 'menucard/newmenu.html', context)
    
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
