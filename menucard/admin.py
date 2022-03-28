@@ -10,6 +10,10 @@ from django.utils.html import mark_safe
 # admin.site.register(Category)
 # admin.site.register(Item)
 
+def is_admingroup(user):
+     return user.groups.filter(name='admingroup').exists()
+
+
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
     view_on_site = False
@@ -21,36 +25,32 @@ class HotelAdmin(admin.ModelAdmin):
         return mark_safe('<img src="{url}" width="300" height="200"/>'.format(
             url = obj.bgimage.url,           
             ))
-
     
     def get_queryset(self, request):
             qs = super().get_queryset(request)
-            if request.user.is_superuser:
+            if request.user.is_superuser or is_admingroup(request.user)  :
                 return qs
             return qs.filter(user=request.user)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
             if db_field.name == "user":
                 created_by=User.objects.all()
-                if not request.user.is_superuser:
-                        kwargs["queryset"] = User.objects.filter(username=request.user)
+                if  request.user.is_superuser or is_admingroup(request.user) :
+                    kwargs["queryset"] = created_by                
                 else:
-                        kwargs["queryset"] = created_by
+                    kwargs["queryset"] = User.objects.filter(username=request.user)
+                        
                     # created_by=request.user
                     # if created_by:
-                   
             
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(HotelAdmin, self).get_fieldsets(request, obj)
-        if not request.user.is_superuser:
-            return [(None, {'fields': ('name','address','bgimage','image_photo')}),]
-        else:
-            return fieldsets   
-
-
-       
+        if request.user.is_superuser or is_admingroup(request.user):
+            return fieldsets             
+        return [(None, {'fields': ('name','address','bgimage','image_photo')}),]
+              
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -64,7 +64,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
             qs = super().get_queryset(request)
-            if request.user.is_superuser:
+            if request.user.is_superuser or is_admingroup(request.user):
                 return qs
             return qs.filter(created_by=request.user)
 
@@ -73,24 +73,21 @@ class CategoryAdmin(admin.ModelAdmin):
                     # created_by=request.user
                     # if created_by:
                 created_by=User.objects.all()
-                if not request.user.is_superuser:
-                        kwargs["queryset"] = User.objects.filter(username=request.user)
+                if request.user.is_superuser or is_admingroup(request.user):
+                     kwargs["queryset"] = created_by   
                 else:
-                        kwargs["queryset"] = created_by
-
+                    kwargs["queryset"] = User.objects.filter(username=request.user)
             elif db_field.name == "hotel" :
                 hotel=Hotel.objects.all()   
-                if not request.user.is_superuser:
-                    kwargs["queryset"] = Hotel.objects.filter(user=request.user)
+                if request.user.is_superuser or is_admingroup(request.user):
+                    kwargs["queryset"]=hotel
                 else:
-                     kwargs["queryset"]=hotel
+                    kwargs["queryset"] = Hotel.objects.filter(user=request.user)                   
     
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
             
             
-            return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
-
+            
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     view_on_site = False
@@ -116,7 +113,7 @@ class ItemAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser:
+        if request.user.is_superuser or is_admingroup(request.user):
             return qs
         return qs.filter(created_by=request.user)
 
@@ -124,26 +121,25 @@ class ItemAdmin(admin.ModelAdmin):
         
             if db_field.name == "created_by":
                 created_by=User.objects.all()
-
-                if not request.user.is_superuser:
-                    kwargs["queryset"] = User.objects.filter(username=request.user)
+                if  request.user.is_superuser or is_admingroup(request.user):
+                    kwargs["queryset"] = created_by                    
                 else:
-                     kwargs["queryset"] = created_by
+                    kwargs["queryset"] = User.objects.filter(username=request.user)
             
             elif db_field.name == "categories":
                 categories=Category.objects.all()
-                if not request.user.is_superuser:
-                    kwargs["queryset"] = Category.objects.filter(created_by=request.user)
+                if  request.user.is_superuser or is_admingroup(request.user):
+                    kwargs["queryset"]=categories                    
                 else:
-                     kwargs["queryset"]=categories
-
+                    kwargs["queryset"] = Category.objects.filter(created_by=request.user)
+            
             elif db_field.name == "hotel" :
                 hotel=Hotel.objects.all()   
-                if not request.user.is_superuser:
-                    kwargs["queryset"] = Hotel.objects.filter(user=request.user)
+                if request.user.is_superuser or is_admingroup(request.user):
+                    kwargs["queryset"]=hotel                    
                 else:
-                     kwargs["queryset"]=hotel
-    
+                    kwargs["queryset"] = Hotel.objects.filter(user=request.user)
+              
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
