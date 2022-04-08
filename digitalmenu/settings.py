@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'menucard',
-    'accounts',
+    #'accounts',
     'crispy_forms',
     'storages',
     'upload',
@@ -157,6 +158,9 @@ DEFAULT_FILE_STORAGE ='storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_REGION_NAME='ap-south-1'
 AWS_S3_ADDRESSING_STYLE='virtual'
 AWS_S3_SIGNATURE_VERSION='s3v4'
+
+# IMPORT_EXPORT_IMPORT_PERMISSION_CODE = 'view' 
+# IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
 
 
 # CACHES = {

@@ -31,7 +31,6 @@ def upload_file_view(request):
         form=UploadModelform()
         obj=UploadFile.objects.get(activated=False)
         filename=obj.file_name.name
-
         object_key=filename
         csv_obj = client.get_object(Bucket=bucket_name, Key=object_key)
         csvcontent = csv_obj['Body'].read().decode('utf-8').splitlines()
