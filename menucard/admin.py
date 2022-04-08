@@ -13,9 +13,9 @@ from django.utils.html import mark_safe
 
 def is_admingroup(user):
      return user.groups.filter(name='admingroup').exists()
-
+#ImportExportModelAdmin
 @admin.register(Hotel)
-class HotelAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+class HotelAdmin(admin.ModelAdmin):
     view_on_site = False
     list_display = ['name']
     search_fields = ['name']
@@ -47,9 +47,9 @@ class HotelAdmin(ImportExportModelAdmin,admin.ModelAdmin):
             return fieldsets             
         return [(None, {'fields': ('name','address','bgimage','image_photo')}),]
               
-
+#ImportExportModelAdmin,
 @admin.register(Category)
-class CategoryAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     view_on_site = False
     list_display = ['title','active']
     search_fields = ['title']
@@ -74,9 +74,9 @@ class CategoryAdmin(ImportExportModelAdmin,admin.ModelAdmin):
                 else:
                     kwargs["queryset"] = User.objects.filter(username=request.user)
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
-           
+#ImportExportModelAdmin,           
 @admin.register(Item)
-class ItemAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+class ItemAdmin(admin.ModelAdmin):
     view_on_site = False
     search_fields = ['title']
     list_filter = ('label',('categories',admin.RelatedOnlyFieldListFilter))
