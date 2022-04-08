@@ -99,12 +99,18 @@ class ItemAdmin(admin.ModelAdmin):
         return qs.filter(created_by=request.user)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-            if db_field.name in ["created_by","categories","hotel"]:
+            if db_field.name in ["created_by","hotel"]:
                 created_by=User.objects.all()
                 if  request.user.is_superuser :
                     kwargs["queryset"] = created_by                    
                 else:
                     kwargs["queryset"] = User.objects.filter(username=request.user)
+            elif db_field.name == "categories":
+                categories=Category.objects.all()
+                if not request.user.is_superuser:
+                    kwargs["queryset"] = Category.objects.filter(created_by=request.user)
+                else:
+                     kwargs["queryset"]=categories
             
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
