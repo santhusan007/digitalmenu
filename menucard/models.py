@@ -30,7 +30,6 @@ class Hotel(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=225)
     created_by = models.ForeignKey(User,on_delete=models.CASCADE)
-    
     hotel=models.ForeignKey(Hotel,on_delete=models.CASCADE,blank=True)
     active=models.BooleanField(default=True)
 

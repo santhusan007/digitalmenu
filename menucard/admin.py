@@ -7,15 +7,21 @@ from django.contrib.auth.models import User
 from django.utils.html import format_html
 from django.utils.html import mark_safe
 
+
 # Register your models here.
 # admin.site.register(Category)
 # admin.site.register(Item)
 
+#function to idntify the user is in admin group or not
 def is_admingroup(user):
      return user.groups.filter(name='admingroup').exists()
+
+
+
 #ImportExportModelAdmin
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
+    
     view_on_site = False
     list_display = ['name']
     search_fields = ['name']
@@ -25,7 +31,7 @@ class HotelAdmin(admin.ModelAdmin):
         return mark_safe('<img src="{url}" width="300" height="200"/>'.format(
             url = obj.bgimage.url,           
             ))
-    
+        
     def get_queryset(self, request):
             qs = super().get_queryset(request)
             if request.user.is_superuser or is_admingroup(request.user)  :
@@ -65,18 +71,28 @@ class CategoryAdmin(admin.ModelAdmin):
             return qs.filter(created_by=request.user)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-            if db_field.name in ["created_by","hotel" ]:
+            if db_field.name =="hotel":
                     # created_by=request.user
                     # if created_by:
-                created_by=User.objects.all()
+                qs=Hotel.objects.all()
                 if request.user.is_superuser :
-                     kwargs["queryset"] = created_by   
+                     kwargs["queryset"] = qs 
                 else:
-                    kwargs["queryset"] = User.objects.filter(username=request.user)
+                    kwargs["queryset"] = Hotel.objects.filter(user_id=request.user.id)
+
+            elif db_field.name =="created_by":
+                qs=User.objects.all()
+                if  request.user.is_superuser :
+                    kwargs["queryset"] = qs                 
+                else:
+                    kwargs["queryset"] =User.objects.filter(username=request.user)
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
 #ImportExportModelAdmin,           
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    
     view_on_site = False
     search_fields = ['title']
     list_filter = ('label',('categories',admin.RelatedOnlyFieldListFilter))
@@ -86,12 +102,13 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = ['title','description','active','price']
     list_editable = ('active',)
     ordering = ('id', )
-         
+
     def image_photo(self, obj):
         return mark_safe('<img src="{url}" width="200" height="200"/>'.format(
-            url = obj.image.url,           
+            url = obj.bgimage.url,           
             ))
-    
+         
+        
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         if request.user.is_superuser :
@@ -99,18 +116,30 @@ class ItemAdmin(admin.ModelAdmin):
         return qs.filter(created_by=request.user)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-            if db_field.name in ["created_by","hotel"]:
-                created_by=User.objects.all()
+            
+            if db_field.name == "hotel":
+                qs=Hotel.objects.all()
                 if  request.user.is_superuser :
-                    kwargs["queryset"] = created_by                    
+                    kwargs["queryset"] = qs                 
                 else:
-                    kwargs["queryset"] = User.objects.filter(username=request.user)
+                    kwargs["queryset"] =Hotel.objects.filter(user_id=request.user.id)
+
+            elif db_field.name =="created_by":
+                qs=User.objects.all()
+                if  request.user.is_superuser :
+                    kwargs["queryset"] = qs                 
+                else:
+                    kwargs["queryset"] =User.objects.filter(username=request.user)
+
             elif db_field.name == "categories":
+                hotel=Hotel.objects.get(user_id=request.user.id)
                 categories=Category.objects.all()
-                if not request.user.is_superuser:
-                    kwargs["queryset"] = Category.objects.filter(created_by=request.user)
+                if request.user.is_superuser:
+                    kwargs["queryset"]=categories
+                    
                 else:
-                     kwargs["queryset"]=categories
+                    kwargs["queryset"] = Category.objects.filter(hotel_id=hotel.id)
+                    
             
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
 

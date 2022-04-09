@@ -1,6 +1,7 @@
 from .models import Category
 from django.db.models import Count,Q
 
+
 class MainView:
 
     def __init__(self,check1,check2,check3):
@@ -32,6 +33,7 @@ class MainView:
         
         return details
 
+# function for getting the image in admin site
 
     
 
