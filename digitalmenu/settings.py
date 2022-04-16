@@ -31,14 +31,14 @@ ALLOWED_HOSTS = ['mymenudigi.herokuapp.com','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    #'clearcache',
+    'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'import_export',
+    'import_export',
     'menucard',
     #'accounts',
     'crispy_forms',

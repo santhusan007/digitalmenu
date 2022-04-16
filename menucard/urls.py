@@ -7,8 +7,7 @@ from .views import ( newMenuDisplay,landing,)
 app_name = "menucard"
 urlpatterns = [
     
-    path('',landing , name='landing'),
-    
+    path('',landing , name='landing'),    
     path('<str:header>/',newMenuDisplay , name='mymenu'),
    
     

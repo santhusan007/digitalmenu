@@ -1,9 +1,9 @@
 from django.db import models
-from django.conf import settings
+#from django.conf import settings
 from django.shortcuts import reverse
-from django.utils import timezone
+#from django.utils import timezone
 from django.contrib.auth.models import User
-from PIL import Image
+#from PIL import Image
 
 # Create your models here.
 

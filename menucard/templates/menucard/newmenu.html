@@ -1,82 +1,18 @@
 ﻿{% extends "menucard/base.html" %}
 
+{% block title %}
+<title>
+
+  {{ hotel.name}}</title>
+
+{% endblock title %}
+
 {% block content %}
 
-<style>
-
-  
-  :root {
-    --bg-color:{{ hotel.bgcolor }} !IMPORTANT ;
-    --my-color:{{ hotel.mycolor }} !IMPORTANT ;
-    --cat-color:{{ hotel.catcolor }} !IMPORTANT;
-    --border-color:{{ hotel.bordercolor }} !IMPORTANT;
-
-  }
-
-  body {
-    font-size: 14px;
-    background:  var(--bg-color) ;
-  }
-
-  #hero {
-    width: 100%;
-    height: 30vh;    
-    filter: brightness(180%);
-    background-size: cover;
-    position: relative;
-    padding: 0;
-  }
-
-  .section-bg {
-    background-color: var(--bg-color);
-  }
-
-  .cateogery{
-  color: var(--cat-color);
-  font-size: 20px;
-}
-
-  .menu .menu-content span {
-    background: var(--bg-color);
-  }
+{% include "menucard/customcss.html" %}
 
 
-  .box-shadow {
-    background: var(--bg-color);
-    box-shadow: 1px 4px var(--border-color);
-    -webkit-box-shadow: 1px 4px var(--border-color);
-
-  }
-
-  .section-title p {
-    color: var(--my-color);
-  }
-  .menu .menu-ingredients {
-
-    color: var(--my-color);
-
-  }
-  .btn:active {
-            background-color: orange;
-            box-shadow: 0 5px gray;
-            transform: translateY(2px);
-         }
-
-.btn-sm  {
-
-
- padding-top: .1rem;
- padding-left: .1rem;
- padding-right: .1rem;
- padding-bottom: .1rem;
- font-size: .7rem;
- line-height: 1.5;
-}
-
-</style>
-
-
-<section id="hero"  style="background: url('{{hotel.bgimage.url}}')  top center;width: 100%;
+<section id="hero" style="background: url('{{hotel.bgimage.url}}')  top center;width: 100%;
 height: 30vh;    
 filter: brightness(180%);
 background-size: cover;
@@ -93,262 +29,309 @@ padding: 0; " class="d-flex align-items-center">
     </div>
   </div>
 </section><!-- End Hero data-aos="fade-up" data-aos-delay="200" -->
-  <!-- ======= Menu Section ======= -->
-  <section id="menu" class="menu section-bg">
-    <div class="container">
+<!-- ======= Menu Section ======= -->
+<section id="menu" class="menu section-bg">
+  <div class="container">
 
-      <div class="section-title ">
-        <div class="header" id="myHeader" style="width: 60%;float: right; overflow: hidden ">
-          <div class="sb-example-1">
-            <div class="search">
-              <input id="filter" type="text" class="searchTerm" placeholder="What are you looking for?">
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search" style="color: lightgrey;"></i>
-              </button>
-            </div>
+    <div class="section-title ">
+      <div class="header" id="myHeader" style="width: 60%;float: right; overflow: hidden ">
+        <div class="sb-example-1">
+          <div class="search">
+            <input id="filter" type="text" class="searchTerm" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search" style="color: lightgrey;"></i>
+            </button>
           </div>
         </div>
-        <p  id="recommended"> Menu</p>
-
-        {% comment %}
-          
-       
-
-        {% if pureveg %}
-        <!-- <span style="color: var(--my-color);" data-aos="zoom-in" data-aos-delay="100"> -->
-          <!-- Pure veg -->
-          <button  style="color: var(--my-color)" id="btnSuccess" class="btn btn-success btn-sm " >Veg Only</button> 
-     {% else %}
-
-      <form action="" method="POST" >
-          {% csrf_token %}         
-          {% if types == 'All' %}
-         <button id="All"  type="submit" class="btn btn-warning btn-sm active " style="border-radius: 50%;box-shadow:0 4px #d39e00"  value="All" name="type" >&nbsp;all&nbsp;</button> 
-         {% else %}
-   
-         <button id="All"  type="submit" class="btn btn-light btn-sm " style="border-radius: 50%;box-shadow: 0px 4px  #ccc"  value="All" name="type">&nbsp;all&nbsp;</button>
-         {% endif %} 
-        
-         {% if types == 'VEG' %}
-         
-         <button id="veg"  type="submit" class="btn btn-success btn-sm active" style="border-radius: 50%;box-shadow: 0px 4px #1e7e34"   value="VEG" name="type">veg</button> 
-         {% else %}
-         <button id="veg"  type="submit" class="btn btn-light btn-sm" style="border-radius: 50%;box-shadow: 0px 4px  #ccc"  value="VEG" name="type">veg</button> 
-         {% endif %} 
-         {% if types == 'NON-VEG' %}
-          <button id="non-veg"  type="submit" class="btn btn-danger btn-sm active" style="border-radius: 50%;box-shadow: 0px 4px  #bd2130"   value="NON-VEG" name="type">non</button>
-          {% else %}
-          <button id="non-veg"  type="submit" class="btn btn-light btn-sm " style="border-radius: 50%;box-shadow: 0px 4px  #ccc"  value="NON-VEG" name="type">non</button>
-          {% endif %} 
-      </form>  
-
-      {% endif %}
-      {% endcomment %}
-     
       </div>
-      
-      <div id="results">
-        <div class="cateogery" data-aos="zoom-in" data-aos-delay="100"> {{hotel.specialheading}} </div>
-        {% for category in details %}
+      <p id="recommended"> Menu</p>
+      {% comment %}
+      {% include "menucard/menubutton.html" %}
+
+      {% endcomment %}
+
+
+    </div>
+
+    <div id="results">
+      <div class="cateogery" data-aos="zoom-in" data-aos-delay="100"> {{hotel.specialheading}} </div>
+      {% for category in details %}
       <div id="results" class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
-          {% for item in category.Category.all%}
-          {% if item.label %}
-          <div class="col-lg-6 menu-item filter-starters imageContainer">
-            {% if item.image %}
-            <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
-            {% endif %}
-           {%if item.type == 'NON-VEG' %}
-            <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
-            <div class="menu-content">
+        {% for item in category.Category.all %}
+        {% if types and category.cattype == item.type %}
+        {% if item.label %}
+        <div class="col-lg-6 menu-item filter-starters imageContainer">
+          {% if item.image %}
+          <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
+          {% endif %}
+          {%if item.type == 'NON-VEG' %}
+          <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          <div class="menu-content">
             <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
-                style="background: var(--bg-color);color: var(--my-color);">
-                {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-              
-            </div>
-            {% else %}
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
 
-            <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
-            <div class="menu-content">
-              <span style="background: var(--bg-color);color: var(--my-color);  "> {{item.title}} </span> <span
-                style="background: var(--bg-color);color: var(--my-color);">
-                {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-            </div>
-            {% endif %}
+          </div>
+          {% else %}
 
-            <div class="menu-ingredients">
-              {{item.description}}
-            </div>
-
+          <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
+          <div class="menu-content">
+            <span style="background: var(--bg-color);color: var(--my-color);  "> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
           </div>
           {% endif %}
-          {% endfor %}
-        </div>
-        {% endfor %}
-      </div>
-      {% for category in details %}
-     
-      <div id="results">
-        <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
-        margin-top: -25px;"> {{category}}</div>
-        <!-- {{category}} ({{category.items_count}}) </div> -->
-        <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
 
-          {% for item in category.Category.all %}
-          <div class="col-lg-6 menu-item filter-starters imageContainer">
-            {% if item.image %}
-            <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
-
-            {% endif %}
-            {%if item.type == 'NON-VEG' %}
-            
-            <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
-            <div class="menu-content non-veg">
-              <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
-                style="background: var(--bg-color);color: var(--my-color);">
-                {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-
-            </div>
-            {% else %}
-
-            <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
-            <div class="menu-content veg">
-              <span style="background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span
-                style="background: var(--bg-color);color: var(--my-color);">
-                {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-            </div>
-            {% endif %}
-
-            <div class="menu-ingredients">
-              {{item.description}}
-            </div>
-
+          <div class="menu-ingredients">
+            {{item.description}}
           </div>
 
-          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% comment %}
+        elif condition for type all and none
+        {% endcomment %}
+
+        {% elif types == 'All' or types == None %}
+
+        {% if item.label %}
+        <div class="col-lg-6 menu-item filter-starters imageContainer">
+          {% if item.image %}
+          <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
+          {% endif %}
+          {% if item.type == 'NON-VEG' %}
+          <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          <div class="menu-content">
+            <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+
+          </div>
+          {% else %}
+
+          <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
+          <div class="menu-content">
+            <span style="background: var(--bg-color);color: var(--my-color);  "> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+          </div>
+          {% endif %}
+
+          <div class="menu-ingredients">
+            {{item.description}}
+          </div>
+
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+    {% for category in details %}
+
+    <div id="results">
+      <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
+        margin-top: -25px;"> {{category}}</div>
+      <!-- {{category}} ({{category.items_count}}) </div> -->
+      <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
+
+        {% for item in category.Category.all %}
+        {% if types and category.cattype == item.type %}
+        <div class="col-lg-6 menu-item filter-starters imageContainer">
+          {% if item.image %}
+          <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
+
+          {% endif %}
+          {% if item.type == 'NON-VEG' %}
+
+          <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          <div class="menu-content non-veg">
+            <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+
+          </div>
+          {% else %}
+
+          <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
+          <div class="menu-content veg">
+            <span style="background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+          </div>
+          {% endif %}
+
+          <div class="menu-ingredients">
+            {{item.description}}
+          </div>
+
+        </div>
+        {% elif types == 'All' or types == None %}
+
+        <div class="col-lg-6 menu-item filter-starters imageContainer">
+          {% if item.image %}
+          <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
+
+          {% endif %}
+          {% if item.type == 'NON-VEG' %}
+
+          <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          <div class="menu-content non-veg">
+            <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+
+          </div>
+          {% else %}
+
+          <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
+          <div class="menu-content veg">
+            <span style="background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+          </div>
+          {% endif %}
+
+          <div class="menu-ingredients">
+            {{item.description}}
+          </div>
 
         </div>
 
-        
+
+
+        {% endif %}
         {% endfor %}
 
       </div>
-    </div>
 
-  </section><!-- End Menu Section -->
-  <div class="myButtonContainer">
-    <div id="mybutton" style="z-index: 9">
-      <!--button class="feedback toggle">Browse Menu</button-->
-      <input class="feedback" type="button" id="btnShow" style="z-index: 9" value="Browse Menu" />
-      <div id="dialog" style="display: none" ;>
-        <ul style="list-style:square; color:var(--my-color);">
-          <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>
-          {% for category in details %}
-       
-          <li><a href="#{{category}}">{{category}} <span style=" font-size: small;"><strong>({{category.items_count}})</strong></span></a></li>
-          
-          {% endfor %}
-        </ul>
-      </div>
-      <div>
-        <a href="{{hotel.whatsapplink}}" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa"
-            style="z-index: 9" alt=""></a>
-      </div>
-      <div>
-        <a href="tel:{{hotel.mobile}}"> <img src="/static/assets/img/call.png" id="phone" style="z-index: 9" alt=""></a>
 
-      </div>
+      {% endfor %}
+
     </div>
   </div>
-  <p class="ml-3">{{hotel.message1}}</p>
-  <p class="ml-3">{{hotel.message2}}</p>
-  <br>
-  <br>
-  <br><br>
 
-  <!-- Vendor JS Files -->
-<!-- serch function -->
+</section><!-- End Menu Section -->
+<div class="myButtonContainer">
+  <div id="mybutton" style="z-index: 9">
+    <!--button class="feedback toggle">Browse Menu</button-->
+    <input class="feedback" type="button" id="btnShow" style="z-index: 9" value="Browse Menu" />
+    <div id="dialog" style="display: none" ;>
+      <ul style="list-style:square; color:var(--my-color);">
+        <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>
+        {% for category in details %}
+
+        <li><a href="#{{category}}">{{category}} <span
+              style=" font-size: small;"><strong>({{category.items_count}})</strong></span></a></li>
+
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <a href="{{hotel.whatsapplink}}" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa" style="z-index: 9"
+          alt=""></a>
+    </div>
+    <div>
+      <a href="tel:{{hotel.mobile}}"> <img src="/static/assets/img/call.png" id="phone" style="z-index: 9" alt=""></a>
+
+    </div>
+  </div>
+</div>
+<p class="ml-3">{{hotel.message1}}</p>
+<p class="ml-3">{{hotel.message2}}</p>
+<br>
+<br>
+<br><br>
+
 <script>
 
-var buttonClicked = null;
-function highlight(id) {
-    if(buttonClicked != null)
-    {
-        buttonClicked.style.background = "rgba(255,0,0,0.8)";
+  var buttonClicked = null;
+  function highlight(id) {
+    if (buttonClicked != null) {
+      buttonClicked.style.background = "rgba(255,0,0,0.8)";
     }
 
-    buttonClicked  = document.getElementById(id);
-    buttonClicked.style.background =  "rgba(255,0,0,0.6)";
-}
+    buttonClicked = document.getElementById(id);
+    buttonClicked.style.background = "rgba(255,0,0,0.6)";
+  }
 
 </script>
 
 <script type="text/javascript">
-    window.onload = function () {
-      $("#filter").keyup(function () {
-        var filter = $(this).val(),
-          count = 0;
-        $('#results div').each(function () {
-          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-            $(this).hide();
-          } else {
-            $(this).show();
-            count++;
-          }
-        });
+  window.onload = function () {
+    $("#filter").keyup(function () {
+      var filter = $(this).val(),
+        count = 0;
+      $('#results div').each(function () {
+        if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+          $(this).hide();
+        } else {
+          $(this).show();
+          count++;
+        }
       });
-    }
-  </script>
-
-  <!-- browse menu bottom button -->
-<script>
-    $('#btnShow').click(function () {
-      $('#dialog').dialog('open');
-      closedialog = 0;
     });
-    var closedialog;
-    function overlayclickclose() {
-      if (closedialog) {
-        $('#dialog').dialog('close');
-      }
-      //set to one because click on dialog box sets to zero 
-      closedialog = 1;
   }
-    $('#dialog').dialog({
-      autoOpen: false,
-      closeOnEscape: true,
-      modal: false,
-      title: "Menu",
-      width: 350,
-      height: 350,
-      position: { my: "bottom center", at: "center bottom ", of: window },
-      open: function () {
-        $(".ui-dialog-titlebar-close").hide();
-        closedialog = 1;
-        $(document).bind('click', overlayclickclose);
-      },
-      focus: function () {
-        closedialog = 1;
-      },
-      close: function () {
-        $(document).unbind('click');
-      },
+</script>
 
-    });
+<!-- browse menu bottom button -->
+<script>
+  $('#btnShow').click(function () {
+    $('#dialog').dialog('open');
+    closedialog = 0;
+  });
+  var closedialog;
+  function overlayclickclose() {
+    if (closedialog) {
+      $('#dialog').dialog('close');
+    }
+    //set to one because click on dialog box sets to zero 
+    //set to one because click on dialog box sets to zero 
+    //set to one because click on dialog box sets to zero 
+    closedialog = 1;
+  }
+  $('#dialog').dialog({
+    autoOpen: false,
+    closeOnEscape: true,
+    modal: false,
+    title: "Menu",
+    width: 350,
+    height: 350,
+    position: { my: "bottom center", at: "center bottom ", of: window },
+    open: function () {
+      $(".ui-dialog-titlebar-close").hide();
+      closedialog = 1;
+      $(document).bind('click', overlayclickclose);
+    },
+    focus: function () {
+      closedialog = 1;
+    },
+    close: function () {
+      $(document).unbind('click');
+    },
+
+  });
 </script>
 
 <!-- stick search bar-->
-  <script>
-    window.onscroll = function () { myFunction() };
+<script>
+  window.onscroll = function () { myFunction() };
 
-    var header = document.getElementById("myHeader");
-    var sticky = header.offsetTop;
+  var header = document.getElementById("myHeader");
+  var sticky = header.offsetTop;
 
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      header.classList.add("sticky");
+    } else {
+      header.classList.remove("sticky");
     }
-  </script>
+  }
+</script>
+
 {% endblock content %}

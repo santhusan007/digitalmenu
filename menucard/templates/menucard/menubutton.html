@@ -1,0 +1,56 @@
+{% extends "menucard/base.html" %}
+
+{% block tittle %}
+<title>
+
+  {{ hotel.name}}</title>
+
+{% endblock tittle %}
+
+{% block content %}
+
+{% include "menucard/customcss.html" %}
+
+
+{% if hotel.pureveg %}
+
+<!-- <span style="color: var(--my-color);" data-aos="zoom-in" data-aos-delay="100"> -->
+<!-- Pure veg -->
+<button id="veg" type="submit" class="btn btn-success btn-sm active"
+  style="border-radius: 50%;box-shadow: 0px 4px #1e7e34" value="" name="type">veg</button>
+
+{% else %}
+<form action="" method="POST">
+  {% csrf_token %}
+
+  {% if types == 'All' %}
+  <button id="All" type="submit" class="btn btn-warning btn-sm active "
+    style="border-radius: 50%;box-shadow:0 4px #d39e00" value="All" name="type">&nbsp;all&nbsp;</button>
+  {% else %}
+
+  <button id="All" type="submit" class="btn btn-light btn-sm " style="border-radius: 50%;box-shadow: 0px 4px  #ccc"
+    value="All" name="type">&nbsp;all&nbsp;</button>
+  {% endif %}
+
+  {% if types == 'VEG' %}
+
+  <button id="veg" type="submit" class="btn btn-success btn-sm active"
+    style="border-radius: 50%;box-shadow: 0px 4px #1e7e34" value="VEG" name="type">veg</button>
+  {% else %}
+  <button id="veg" type="submit" class="btn btn-light btn-sm" style="border-radius: 50%;box-shadow: 0px 4px  #ccc"
+    value="VEG" name="type">veg</button>
+  {% endif %}
+
+  {% if types == 'NON-VEG' %}
+  <button id="non-veg" type="submit" class="btn btn-danger btn-sm active"
+    style="border-radius: 50%;box-shadow: 0px 4px  #bd2130" value="NON-VEG" name="type">non</button>
+  {% else %}
+  <button id="non-veg" type="submit" class="btn btn-light btn-sm " style="border-radius: 50%;box-shadow: 0px 4px  #ccc"
+    value="NON-VEG" name="type">non</button>
+  {% endif %}
+
+</form>
+
+{% endif %}
+
+{% endblock content %}

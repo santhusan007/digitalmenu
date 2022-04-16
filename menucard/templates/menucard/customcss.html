@@ -1,0 +1,80 @@
+{% extends "menucard/base.html" %}
+
+{% block content %}
+
+<style>
+  
+    :root {
+      --bg-color:{{ hotel.bgcolor }} !IMPORTANT ;
+      --my-color:{{ hotel.mycolor }} !IMPORTANT ;
+      --cat-color:{{ hotel.catcolor }} !IMPORTANT;
+      --border-color:{{ hotel.bordercolor }} !IMPORTANT;
+  
+    }
+    body {
+      font-size: 14px;
+      background: var(--bg-color);
+    }
+  
+    #hero {
+      width: 100%;
+      height: 30vh;
+      filter: brightness(180%);
+      background-size: cover;
+      position: relative;
+      padding: 0;
+    }
+  
+    .section-bg {
+      background-color: var(--bg-color);
+    }
+  
+    .cateogery {
+      color: var(--cat-color);
+      font-size: 20px;
+    }
+  
+    .menu .menu-content span {
+      background: var(--bg-color);
+    }
+  
+  
+    .box-shadow {
+      background: var(--bg-color);
+      box-shadow: 1px 4px var(--border-color);
+      -webkit-box-shadow: 1px 4px var(--border-color);
+  
+    }
+  
+    .section-title p {
+      color: var(--my-color);
+    }
+  
+    .menu .menu-ingredients {
+  
+      color: var(--my-color);
+  
+    }
+  
+    .btn:active {
+      background-color: orange;
+      box-shadow: 0 5px gray;
+      transform: translateY(2px);
+    }
+  
+    .btn-sm {
+  
+  
+      padding-top: .1rem;
+      padding-left: .1rem;
+      padding-right: .1rem;
+      padding-bottom: .1rem;
+      font-size: .7rem;
+      line-height: 1.5;
+    }
+  </style>
+
+
+    
+  {% endblock content%}
+  
