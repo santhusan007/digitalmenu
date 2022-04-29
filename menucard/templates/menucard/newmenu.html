@@ -46,9 +46,13 @@ padding: 0; " class="d-flex align-items-center">
       </div>
       <p id="recommended"> Menu</p>
       {% comment %}
+        
+     
+      
       {% include "menucard/menubutton.html" %}
 
       {% endcomment %}
+    
 
 
     </div>
@@ -58,7 +62,7 @@ padding: 0; " class="d-flex align-items-center">
       {% for category in details %}
       <div id="results" class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
         {% for item in category.Category.all %}
-        {% if types and category.cattype == item.type %}
+        {% if types and types == item.type %}
         {% if item.label %}
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
@@ -132,7 +136,7 @@ padding: 0; " class="d-flex align-items-center">
 
 
 
-    {% for category in details %}
+  {% for category in details %}
 
     <div id="results">
       <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
@@ -140,39 +144,8 @@ padding: 0; " class="d-flex align-items-center">
       <!-- {{category}} ({{category.items_count}}) </div> -->
       <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
 
-        {% for item in category.Category.all %}
-        {% if types and category.cattype == item.type %}
-        <div class="col-lg-6 menu-item filter-starters imageContainer">
-          {% if item.image %}
-          <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
-
-          {% endif %}
-          {% if item.type == 'NON-VEG' %}
-
-          <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
-          <div class="menu-content non-veg">
-            <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
-              style="background: var(--bg-color);color: var(--my-color);">
-              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-
-          </div>
-          {% else %}
-
-          <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
-          <div class="menu-content veg">
-            <span style="background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span
-              style="background: var(--bg-color);color: var(--my-color);">
-              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-          </div>
-          {% endif %}
-
-          <div class="menu-ingredients">
-            {{item.description}}
-          </div>
-
-        </div>
-        {% elif types == 'All' or types == None %}
-
+      {% for item in category.Category.all %}
+      {% if types and types == item.type %}
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
@@ -203,15 +176,47 @@ padding: 0; " class="d-flex align-items-center">
 
         </div>
 
+      {% elif types == 'All' or types == None %}
+
+        <div class="col-lg-6 menu-item filter-starters imageContainer">
+          {% if item.image %}
+          <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
+
+          {% endif %}
+          {% if item.type == 'NON-VEG' %}
+
+          <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          <div class="menu-content non-veg">
+            <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+
+          </div>
+          {% else %}
+
+          <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
+          <div class="menu-content veg">
+            <span style="background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+          </div>
+          {% endif %}
+
+          <div class="menu-ingredients">
+            {{item.description}}
+          </div>
+
+        </div>
 
 
-        {% endif %}
-        {% endfor %}
+
+      {% endif %}
+      {% endfor %}
 
       </div>
 
 
-      {% endfor %}
+    {% endfor %}
 
     </div>
   </div>

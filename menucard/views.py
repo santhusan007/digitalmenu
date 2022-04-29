@@ -21,6 +21,7 @@ def newMenuDisplay(request,header):
         types=request.POST.get("type")
         if types == "VEG":            
             details=menu.cuisine(types)
+            
         elif types == "NON-VEG":
             details=menu.cuisine(types)
         else :
