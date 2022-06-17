@@ -1,5 +1,5 @@
-from menucard.models import Category,Hotel
-from django.db.models import Count,Q,F
+from menucard.models import Category
+from django.db.models import Count,Q
 
 
 class MainView:

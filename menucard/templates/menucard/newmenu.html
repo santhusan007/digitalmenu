@@ -45,14 +45,12 @@ padding: 0; " class="d-flex align-items-center">
         </div>
       </div>
       <p id="recommended"> Menu</p>
-      {% comment %}
-        
-     
-      
+    
+
       {% include "menucard/menubutton.html" %}
 
-      {% endcomment %}
-    
+      
+
 
 
     </div>
@@ -136,7 +134,7 @@ padding: 0; " class="d-flex align-items-center">
 
 
 
-  {% for category in details %}
+    {% for category in details %}
 
     <div id="results">
       <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
@@ -144,8 +142,8 @@ padding: 0; " class="d-flex align-items-center">
       <!-- {{category}} ({{category.items_count}}) </div> -->
       <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
 
-      {% for item in category.Category.all %}
-      {% if types and types == item.type %}
+        {% for item in category.Category.all %}
+        {% if types and types == item.type %}
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
@@ -176,7 +174,7 @@ padding: 0; " class="d-flex align-items-center">
 
         </div>
 
-      {% elif types == 'All' or types == None %}
+        {% elif types == 'All' or types == None %}
 
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
@@ -210,13 +208,13 @@ padding: 0; " class="d-flex align-items-center">
 
 
 
-      {% endif %}
-      {% endfor %}
+        {% endif %}
+        {% endfor %}
 
       </div>
 
 
-    {% endfor %}
+      {% endfor %}
 
     </div>
   </div>
@@ -323,7 +321,7 @@ padding: 0; " class="d-flex align-items-center">
   });
 </script>
 
-<!-- stick search bar-->
+<!-- sticky search bar-->
 <script>
   window.onscroll = function () { myFunction() };
 

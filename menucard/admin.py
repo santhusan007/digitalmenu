@@ -24,7 +24,7 @@ class HotelAdmin(admin.ModelAdmin,):
     view_on_site = False
     list_display = ['name']
     search_fields = ['name']
-    readonly_fields=["image_photo"]
+    readonly_fields=['image_photo']
 
     def image_photo(self, obj):
         return mark_safe('<img src="{url}" width="300" height="200"/>'.format(

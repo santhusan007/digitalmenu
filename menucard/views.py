@@ -19,11 +19,12 @@ def newMenuDisplay(request,header):
     menu=MainView(check1,check2,check3)
     if request.method=='POST' :
         types=request.POST.get("type")
-        if types == "VEG":            
+        
+        if types == "VEG" or types=="NON-VEG":            
             details=menu.cuisine(types)
             
-        elif types == "NON-VEG":
-            details=menu.cuisine(types)
+        # elif types == "NON-VEG":
+        #     details=menu.cuisine(types)
         else :
             details=menu.allitem()   
         context= {"hotel":hotel,"details":details,"types":types }

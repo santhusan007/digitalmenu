@@ -25,7 +25,7 @@ SECRET_KEY=str(os.environ.get('DJ_MENU_SECRET_KEY'))
 DEBUG =True
 
 
-ALLOWED_HOSTS = ['mymenudigi.herokuapp.com','127.0.0.1','65.0.20.3']
+ALLOWED_HOSTS = ['mymenudigi.com','127.0.0.1']
 
 
 # Application definition
@@ -88,6 +88,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+
 
 
 # Password validation
