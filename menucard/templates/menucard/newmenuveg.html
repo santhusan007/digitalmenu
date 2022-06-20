@@ -1,4 +1,4 @@
-﻿{% extends "menucard/base.html" %}
+{% extends "menucard/base.html" %}
 
 {% block title %}
 <title>
@@ -48,44 +48,26 @@ padding: 0; " class="d-flex align-items-center">
       </div>
       <p id="recommended"> Menu</p>
       
-      {% if hotel.pureveg %}
+      <a href="{% url 'menucard:mymenu' hotel.header %}"><button id="All" type="submit" class="btn btn-light btn-sm "
+      style="border-radius: 50%;box-shadow: 0px 4px  #ccc" value="All" name="type">&nbsp;all&nbsp;</button></a>
       <button id="veg" type="submit" class="btn btn-success btn-sm active"
-      style="border-radius: 50%;box-shadow: 0px 4px #1e7e34" value="" name="type">veg</button>
-      {% else %}
-      <form action="" method="POST">
-        {% csrf_token %}
-
-        <button  id="All" type="submit" class="btn btn-warning btn-sm active "
-    style="border-radius: 50%;box-shadow:0 4px #d39e00" value="All" name="type">&nbsp;all&nbsp;</button>
-    <a href="{% url 'menucard:mymenuveg' hotel.header %}"><button id="veg" type="submit" class="btn btn-light btn-sm" style="border-radius: 50%;box-shadow: 0px 4px  #ccc"
-    value="VEG" name="type">veg</a></button>
-    <a href="{% url 'menucard:mymenunonveg' hotel.header %}"><button id="non-veg" type="submit" class="btn btn-light btn-sm "
-    style="border-radius: 50%;box-shadow: 0px 4px  #ccc" value="NON-VEG" name="type" >non</a></button>
-
-      {% endif %}
-
-
-    </div>
+      style="border-radius: 50%;box-shadow: 0px 4px #1e7e34" value="VEG" name="type">veg</button>
+      <a href="{% url 'menucard:mymenunonveg' hotel.header %}"><button id="non-veg" type="submit" class="btn btn-light btn-sm "
+    style="border-radius: 50%;box-shadow: 0px 4px  #ccc" value="NON-VEG" name="type">non</button></a>
+  
 
     <div id="results">
       <div class="cateogery" data-aos="zoom-in" data-aos-delay="100"> {{hotel.specialheading}} </div>
       {% for category in details %}
       <div id="results" class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
         {% for item in category.Category.all %}
+        {% if item.type == 'VEG' %}
         {% if item.label %}
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
           {% endif %}
-          {%if item.type == 'NON-VEG' %}
-          <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
-          <div class="menu-content">
-            <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
-              style="background: var(--bg-color);color: var(--my-color);">
-              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-
-          </div>
-          {% else %}
+         
 
           <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
           <div class="menu-content">
@@ -93,16 +75,14 @@ padding: 0; " class="d-flex align-items-center">
               style="background: var(--bg-color);color: var(--my-color);">
               {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
           </div>
-          {% endif %}
+          
 
           <div class="menu-ingredients">
             {{item.description}}
           </div>
 
         </div>
-       
-
-        
+        {% endif %}
         {% endif %}
         {% endfor %}
       </div>
@@ -121,22 +101,13 @@ padding: 0; " class="d-flex align-items-center">
 
         {% for item in category.Category.all %}
         <!-- very very important -->
-      
+        {% if item.type == 'VEG' %}
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
 
           {% endif %}
-          {% if item.type == 'NON-VEG' %}
-
-          <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
-          <div class="menu-content non-veg">
-            <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
-              style="background: var(--bg-color);color: var(--my-color);">
-              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-
-          </div>
-          {% else %}
+          
 
           <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
           <div class="menu-content veg">
@@ -144,14 +115,15 @@ padding: 0; " class="d-flex align-items-center">
               style="background: var(--bg-color);color: var(--my-color);">
               {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
           </div>
-          {% endif %}
+          
 
           <div class="menu-ingredients">
             {{item.description}}
           </div>
 
         </div>
-       
+     
+        {% endif %}
         {% endfor %}
 
       </div>

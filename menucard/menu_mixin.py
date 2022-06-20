@@ -1,5 +1,5 @@
 from menucard.models import Category
-from django.db.models import Count,Q
+from django.db.models import Count,Q,F
 
 
 class MainView:
@@ -17,7 +17,7 @@ class MainView:
         details=(
             Category.objects.filter(Q(Category__type__startswith=types) & self.check1 & self.check2 & self.check3)
             .prefetch_related('Category').annotate(items_count=Count('Category'))
-            #.annotate(cattype=F('Category__type'))
+            .annotate(cattype=F('Category__type'))
             .order_by('id')
                 ) 
         return details
@@ -31,13 +31,3 @@ class MainView:
             )
         
         return details
-
-
-
-  
-
-
-  
-
-
-
