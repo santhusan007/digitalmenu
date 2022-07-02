@@ -58,9 +58,9 @@ padding: 0; " class="d-flex align-items-center">
         <button  id="All" type="submit" class="btn btn-warning btn-sm active "
     style="border-radius: 50%;box-shadow:0 4px #d39e00" value="All" name="type">&nbsp;all&nbsp;</button>
     <a href="{% url 'menucard:mymenuveg' hotel.header %}"><button id="veg" type="submit" class="btn btn-light btn-sm" style="border-radius: 50%;box-shadow: 0px 4px  #ccc"
-    value="VEG" name="type">veg</a></button>
-    <a href="{% url 'menucard:mymenunonveg' hotel.header %}"><button id="non-veg" type="submit" class="btn btn-light btn-sm "
-    style="border-radius: 50%;box-shadow: 0px 4px  #ccc" value="NON-VEG" name="type" >non</a></button>
+      value="VEG" name="type">veg</a></button>
+      <a href="{% url 'menucard:mymenunonveg' hotel.header %}"><button id="non-veg" type="submit" class="btn btn-light btn-sm "
+        style="border-radius: 50%;box-shadow: 0px 4px  #ccc" value="NON-VEG" name="type">non</a></button>
 
       {% endif %}
 
@@ -167,7 +167,7 @@ padding: 0; " class="d-flex align-items-center">
   <div id="mybutton" style="z-index: 9">
     <!--button class="feedback toggle">Browse Menu</button-->
     <input class="feedback" type="button" id="btnShow" style="z-index: 9" value="Browse Menu" />
-    <div id="dialog" style="display: none" ;>
+    <div id="dialog" style="display:block" ;>
       <ul style="list-style:square; color:var(--my-color);">
         <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>
         {% for category in details %}
@@ -196,89 +196,5 @@ padding: 0; " class="d-flex align-items-center">
 
 <!-- Vendor JS Files -->
 <!-- serch function -->
-<script>
-
-  var buttonClicked = null;
-  function highlight(id) {
-    if (buttonClicked != null) {
-      buttonClicked.style.background = "rgba(255,0,0,0.8)";
-    }
-
-    buttonClicked = document.getElementById(id);
-    buttonClicked.style.background = "rgba(255,0,0,0.6)";
-  }
-
-</script>
-
-<script type="text/javascript">
-  window.onload = function () {
-    $("#filter").keyup(function () {
-      var filter = $(this).val(),
-        count = 0;
-      $('#results div').each(function () {
-        if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-          $(this).hide();
-        } else {
-          $(this).show();
-          count++;
-        }
-      });
-    });
-  }
-</script>
-
-<!-- browse menu bottom button -->
-<script>
-  $('#btnShow').click(function () {
-    $('#dialog').dialog('open');
-    closedialog = 0;
-  });
-  var closedialog;
-  function overlayclickclose() {
-    if (closedialog) {
-      $('#dialog').dialog('close');
-    }
-    //set to one because click on dialog box sets to zero 
-      //set to one because click on dialog box sets to zero 
-    //set to one because click on dialog box sets to zero 
-    closedialog = 1;
-  }
-  $('#dialog').dialog({
-    autoOpen: false,
-    closeOnEscape: true,
-    modal: false,
-    title: "Menu",
-    width: 350,
-    height: 350,
-    position: { my: "bottom center", at: "center bottom ", of: window },
-    open: function () {
-      $(".ui-dialog-titlebar-close").hide();
-      closedialog = 1;
-      $(document).bind('click', overlayclickclose);
-    },
-    focus: function () {
-      closedialog = 1;
-    },
-    close: function () {
-      $(document).unbind('click');
-    },
-
-  });
-</script>
-
-<!-- stick search bar-->
-<script>
-  window.onscroll = function () { myFunction() };
-
-  var header = document.getElementById("myHeader");
-  var sticky = header.offsetTop;
-
-  function myFunction() {
-    if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
-    } else {
-      header.classList.remove("sticky");
-    }
-  }
-</script>
+{% include "menucard/customscript.html" %}
 {% endblock content %}

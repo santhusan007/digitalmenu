@@ -77,12 +77,14 @@ h1, h2, h3, h4, h5, h6 {
 
 
   <!-- Template Main JS File -->
+  
   <script src="{% static 'assets/js/main.js' %}"></script>
   <script>
     document.body.addEventListener('htmx:configRequest', (event) => {
       event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
     })
   </script>
+
 
 
 </body>
