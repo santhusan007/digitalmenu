@@ -59,30 +59,20 @@
           {% if item.image %}
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
           {% endif %}
-          {%if item.type == 'NON-VEG' %}
-          <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          
+          <i class="bi bi-stop-btn {%if item.type == 'NON-VEG' %} nonvegred {% else %} veggreen {% endif %} " style="font-size: 15px;bottom:2px;margin-left:10px;"></i>
           <div class="menu-content">
             <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
               style="background: var(--bg-color);color: var(--my-color);">
               {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
 
-          </div>
-          {% else %}
-
-          <i class="bi bi-stop-btn" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
-          <div class="menu-content">
-            <span style="background: var(--bg-color);color: var(--my-color);  "> {{item.title}} </span> <span
-              style="background: var(--bg-color);color: var(--my-color);">
-              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-          </div>
-          {% endif %}
+          </div>          
 
           <div class="menu-ingredients">
             {{item.description}}
           </div>
 
-        </div>
-       
+        </div>      
 
         
         {% endif %}
@@ -90,8 +80,6 @@
       </div>
       {% endfor %}
     </div>
-
-
 
     {% for category in details %}
 
@@ -109,36 +97,23 @@
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
 
           {% endif %}
-          {% if item.type == 'NON-VEG' %}
+          
 
-          <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          <i class="bi bi-stop-btn non-veg {%if item.type == 'NON-VEG' %} nonvegred {% else %} veggreen {% endif %}" style="font-size: 15px;bottom:2px;margin-left:10px;"></i>
           <div class="menu-content non-veg">
             <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
               style="background: var(--bg-color);color: var(--my-color);">
               {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
 
-          </div>
-          {% else %}
-
-          <i class="bi bi-stop-btn veg" style="color: #00FF00;font-size: 15px;margin-left:10px;"></i>
-          <div class="menu-content veg">
-            <span style="background: var(--bg-color);;color: var(--my-color);  "> {{item.title}} </span> <span
-              style="background: var(--bg-color);color: var(--my-color);">
-              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-          </div>
-          {% endif %}
+          </div>          
 
           <div class="menu-ingredients">
             {{item.description}}
           </div>
 
-        </div>
-       
+        </div>       
         {% endfor %}
-
       </div>
-
-
       {% endfor %}
 
     </div>

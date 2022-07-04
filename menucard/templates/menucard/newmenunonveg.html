@@ -10,7 +10,7 @@
 {% block content %}
 
 {% include "menucard/customcss.html" %}
-{% include "menucard/customheader.html" %}
+
 
 
 
@@ -51,8 +51,7 @@
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
-          {% endif %}
-          
+          {% endif %}          
           <i class="bi bi-stop-btn " style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
           <div class="menu-content">
             <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
@@ -88,31 +87,24 @@
         <div class="col-lg-6 menu-item filter-starters imageContainer">
           {% if item.image %}
           <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
-
-          {% endif %}
-          
-
+          {% endif %}         
           <i class="bi bi-stop-btn non-veg" style="color: red;font-size: 15px;bottom:2px;margin-left:10px;"></i>
           <div class="menu-content non-veg">
             <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
               style="background: var(--bg-color);color: var(--my-color);">
               {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
-
           </div>
-          
+
           <div class="menu-ingredients">
             {{item.description}}
           </div>
 
         </div>
-     
-        {% endif %}
+             {% endif %}
         {% endfor %}
-
       </div>
 
-
-      {% endfor %}
+ {% endfor %}
 
     </div>
   </div>
