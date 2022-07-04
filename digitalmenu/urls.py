@@ -28,6 +28,7 @@ urlpatterns = [
     path('',include('menucard.urls'),name='menucard'),
     path('accounts/', include('accounts.urls'),name='accounts'),
     path('upload/',include('upload.urls'),name='upload'),
+    path('__debug__/', include('debug_toolbar.urls')),
 
 ]
 

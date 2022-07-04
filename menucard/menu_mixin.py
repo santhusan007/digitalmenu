@@ -1,5 +1,5 @@
 from menucard.models import Category
-from django.db.models import Count,Q,F
+from django.db.models import Count,Q,F,Case,When,IntegerField
 
 
 class MainView:
@@ -16,7 +16,9 @@ class MainView:
         """ filter the cuisine with types veg or non veg as arguments"""
         details=(
             Category.objects.filter(Q(Category__type__startswith=types) & self.check1 & self.check2 & self.check3)
-            .prefetch_related('Category').annotate(items_count=Count('Category'))
+            .prefetch_related('Category').annotate(
+                
+                items_count=Count('Category'))
             #.annotate(cattype=F('Category__type'))
             .order_by('id')
                 ) 
@@ -26,8 +28,16 @@ class MainView:
     def allitem(self):
         details=(
             Category.objects.filter(self.check1 & self.check2 & self.check3)
-            .prefetch_related('Category').annotate(items_count=Count('Category'))
-            .order_by('id')  
+            .prefetch_related('Category').annotate( 
+            items_count=Count('Category') ,
+            veg_count=Count('Category',filter=Q(Category__type="VEG")),
+            nonveg_count=Count('Category',filter=Q(Category__type="NON-VEG")),
+
+            # nonveg_count=Count(Case(When(Category__type='NON-VEG')),output_field=IntegerField())
             )
+            #.annotate(cattype=F('Category__type'))
+            .order_by('id')
+                )  
+            
         
         return details
