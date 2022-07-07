@@ -59,6 +59,30 @@
   
     }
 
+.imageContainer > img:hover {
+  
+  width: 150px;
+  height: 150px;
+  z-index: 10;
+  position: relative;
+  
+  
+  transition: 0.25s ease;
+ 
+}
+
+
+    
+  form {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: .2rem;
+    padding-top: .2rem;
+    position: relative;
+
+  }
+
     .veggreen{
       color:#00FF00 ;
 
@@ -87,12 +111,20 @@
       line-height: 1.5;
     }
 
-    a {
-    color: rgb(33, 37, 41);
-    text-decoration: none;
+    @media only screen and (max-width: 600px){
+    .imageContainer > img:hover {
+  
+  /* width: 200px;
+  height: 150px; */
+  z-index: 10;
+  position: relative;
+  
+  transform: scale(1.5);
+  transition: 0.25s ease;
+  margin-right: 50px;
+ 
 }
-
-
+    }
 
   </style>
 

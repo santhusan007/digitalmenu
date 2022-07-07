@@ -736,11 +736,16 @@ background-color: #3599f1;
 --------------------------------------------------------------*/
 
 .imageContainer > img:hover {
+  
   width: 150px;
   height: 150px;
+  z-index: 10;
+  position: relative;
+  
+  /* transform: scale(1.5); */
   transition: 0.25s ease;
+ 
 }
-
 
 
 .sticky {
@@ -913,6 +918,20 @@ background-color: #3599f1;
   z-index: 9;
   
 }
+
+
+.imageContainer > img:hover {
+  
+  /* width: 150px;
+  height: 150px; */
+  z-index: 10;
+  position: relative;
+  margin-right: 20px;
+  transform: scale(1.5);
+  transition: 0.25s ease;
+ 
+}
+
 
 
 
@@ -1167,7 +1186,7 @@ section {
 /*--------------------------------------------------------------
 # Menu Section
 --------------------------------------------------------------*/
-.menu #menu-flters {
+.menu #menu-filters {
   padding: 0;
   margin: 0 auto 0 auto;
   list-style: none;

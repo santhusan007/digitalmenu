@@ -11,226 +11,85 @@
 
 {% include "menucard/customcss.html" %}
 {% include "menucard/customheader.html" %}
-<style>
-  body {
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-
-  }
-
-  form {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 2rem;
-    padding-top: 2rem;
-    position: relative;
-
-  }
+  <section id="menu" class="menu section-bg">
+    <div class="container">
+  
+      <div class="section-title ">
+        <div class="header" id="myHeader" style="width: 60%;float: right; overflow: hidden ">
+          <div class="sb-example-1">
+            <div class="search">
+              <input id="filter" type="text" class="searchTerm" placeholder="What are you looking for?">
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search" style="color: lightgrey;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <p id="recommended"> Menu</p>
+        
+        {% if hotel.pureveg %}
+        <button id="veg" type="submit" class="btn btn-success btn-sm active"
+        style="border-radius: 50%;box-shadow: 0px 4px green" value="" name="type">veg</button>
+        {% else %}
+  
+        <form id='all' action="">
+          <input id='allbutton' type="submit" value="&nbsp;all&nbsp;" class="btn btn-warning btn-sm active" style="border-radius: 50%;box-shadow: 0px 4px white"; >
+        </form>
   
   
-</style>
-
-<div>
-  <form id='veg' action="">
-    <input id='vegbutton' type="submit" value="veg" class="btn btn-danger btn-sm active">
+        <form id='veg' action="">
+    <input id='vegbutton' type="submit" value="veg" class="btn btn-light btn-sm active"
+    style="border-radius: 50%;box-shadow: 0px 4px white">
   </form>
 
   <form id='non-veg' action="">
-    <input id='nonvegbutton' type="submit" value="non" class="btn btn-danger btn-sm active ">
+    <input id='nonvegbutton' type="submit" value="non" class="btn btn-light btn-sm active "
+    style="border-radius: 50%;box-shadow: 0px 4px white" >
   </form>
 
-  <form id='all' action="">
-    <input id='allbutton' type="submit" value="&nbsp;all&nbsp;" class="btn btn-danger btn-sm active ">
-  </form>
-  <div id='recommendeditems'>{{hotel.specialheading}}</div>
+  
+  {% endif %}
+
+  </div>
+ <div id="results"></div>
 
   <div id='result1'></div>
 
 </div>
-
-
-<script>
-  const recoEl=document.getElementById('recommendeditems')
-  const vegBtn = document.getElementById("veg")
-  const nonVegBtn = document.getElementById("non-veg")
-  const allBtn = document.getElementById("all")
-  const vegBtnColor = document.getElementById("vegbutton")
-  const nonVegBtnColor = document.getElementById("nonvegbutton")
-  const allBtnColor = document.getElementById("allbutton")
-  const resultEl = document.getElementById("result1")
-  const cat = JSON.parse("{{cat|escapejs}}");
-  // console.log(cat)
-  const item = JSON.parse("{{item|escapejs}}");
-  // console.log(item)
-
-
-
-  categoryRecommendedItem(item)
-  categoryAllItem(cat, item)
-
-
-  function categoryRecommendedItem(item){
-    const recodata = document.createElement('div');
-    var list = ""
-    for (i in item){
-      if (item[i]['label']){        
-        list +=
-            ` 
-            
-             ${item[i]['title']}-${item[i]['type']}-${item[i]['price']}
-               <br>
-                    `
-      }
-      recodata.innerHTML = list
-
-      recoEl.appendChild(recodata)
-    }
-  }
-
-
-  function categoryNonVegItem(cat, item) {
-    const catdata = document.createElement('div');
+</section>
+<!-- End Menu Section -->
+<div class="myButtonContainer">
+  <div id="mybutton" style="z-index: 9">
+    <!--button class="feedback toggle">Browse Menu</button-->
+    <input class="feedback" type="button" id="btnShow" style="z-index: 9" value="Browse Menu" />
     
-    var list = ""
-    for (var i in cat) {
-      if (cat[i]['nonveg_count'] > 0) {
+    <div id="dialog"  style="display:none;">
+     
+     
+    </div>
+    <div>
+      <a href="{{hotel.whatsapplink}}" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa" style="z-index: 9"
+          alt=""></a>
+    </div>
+    <div>
+      <a href="tel:{{hotel.mobile}}"> <img src="/static/assets/img/call.png" id="phone" style="z-index: 9" alt=""></a>
 
-        list += ` <br> ${cat[i]['title']}- ${cat[i]['nonveg_count']}
-        <br><br>`
-      }
-      for (var j in item) {
-
-        if (item[j]['type'] === 'NON-VEG' & item[j]['categories_id'] === cat[i]['id'])
-          list +=
-            `  ${item[j]['title']}-${item[j]['type']}-${item[j]['price']}
-               <br>
-                    `;
-      }
-      catdata.innerHTML = list
-      resultEl.appendChild(catdata)
-    }
-
-  }
-
-
-  function categoryVegItem(cat, item) {
-    const catdata = document.createElement('div');
-    var list = ""
-    for (var i in cat) {
-      if (cat[i]['veg_count'] > 0) {
-        // console.log(cat[i]['veg_count'])
-        list += ` <br> ${cat[i]['title']}- ${cat[i]['veg_count']}
-        <br><br>`
-      }
-      for (var j in item) {
-        if (item[j]['type'] === 'VEG' & item[j]['categories_id'] === cat[i]['id'])
-          list +=
-            `  ${item[j]['title']}-${item[j]['type']}-${item[j]['price']}
-               <br>
-                    `
-      }
-      catdata.innerHTML = list
-      resultEl.appendChild(catdata)
-    }
-  }
-
-
-  function categoryAllItem(cat, item) {
-    const catdata = document.createElement('div');
-    var list = ""
-    for (var i in cat) {
-      list += ` <br> ${cat[i]['title']}- ${cat[i]['items_count']}
-        <br><br>`
-      for (var j in item) {
-        if (item[j]['categories_id'] === cat[i]['id'])
-          list +=
-            `  ${item[j]['title']}-${item[j]['type']}-${item[j]['price']}
-               <br>
-                    `;
-      }
-
-      catdata.innerHTML = list
-      resultEl.appendChild(catdata)
-    }
-
-  }
+    </div>
+  </div>
   
+  
+</div>
 
-  nonVegBtn.addEventListener('submit', (e) => {
-    e.preventDefault()
-    nonVegBtnColor.classList.remove('btn-danger')
-    nonVegBtnColor.classList.add('btn-success')    
-    vegBtnColor.classList.add('btn-danger')
-    allBtnColor.classList.add('btn-danger')
-    
-    resultEl.innerHTML = ''
-    categoryNonVegItem(cat, item)
-  });
+<p class="ml-3">{{hotel.message1}}</p>
+<p class="ml-3">{{hotel.message2}}</p>
+<br>
+<br>
+<br><br>
 
-  vegBtn.addEventListener('submit', (e) => {
-    e.preventDefault()
-    vegBtnColor.classList.remove('btn-danger')
-    vegBtnColor.classList.add('btn-success')    
-    allBtnColor.classList.add('btn-danger')
-    nonVegBtnColor.classList.add('btn-danger')
-    
-    resultEl.innerHTML = ''
-    categoryVegItem(cat, item)
-  });
+<!-- Vendor JS Files -->
+<!-- serch function -->
 
-
-  allBtn.addEventListener('submit', (e) => {
-    e.preventDefault()
-    allBtnColor.classList.remove('btn-danger')
-    allBtnColor.classList.add('btn-success') 
-    vegBtnColor.classList.add('btn-danger')
-    nonVegBtnColor.classList.add('btn-danger')
-
-    resultEl.innerHTML = ''
-    categoryAllItem(cat, item)
-  });
-
-
-  var findItemByCategoryId = function(id) {
-    var i = null;
-    var result = []
-    for (i = 0; item.length > i; i += 1) {
-        if (item[i].categories_id === id) {
-            result.push(item[i]);
-        }
-    }
-    return result;
-};
-
-
-// example:
-// categoryItems = findItemByCategoryId(0);
-// for(var i=0; i<items.length; i++) {
-//     //alert(items[i].name)
-// }
-
-var findCategoryById = function(id) {
-    var i = null;
-    for (i = 0; cat.length > i; i += 1) {
-        if (cat[i].id === id) {
-            return cat[i];
-        }
-    }
-};
-
-for(i=1;i<cat.length+1;i++){
-  console.log(findCategoryById(i))
-  console.log(findItemByCategoryId(i))
-    
-}
-
-
-</script>
-
+{% include "menucard/customscript.html" %}
 
 {% endblock %}

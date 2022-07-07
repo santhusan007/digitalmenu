@@ -3,91 +3,529 @@
 {% block content %}
 {% include "menucard/customcss.html" %}
 
-<script>
+  
 
-    var buttonClicked = null;
-    function highlight(id) {
-      if (buttonClicked != null) {
-        buttonClicked.style.background = "rgba(255,0,0,0.8)";
-      }
+<script>
+  const recoEl=document.getElementById('results')
+  const vegBtn = document.getElementById("veg")
+  const nonVegBtn = document.getElementById("non-veg")
+  const allBtn = document.getElementById("all")
+  const vegBtnColor = document.getElementById("vegbutton")
+  const nonVegBtnColor = document.getElementById("nonvegbutton")
+  const allBtnColor = document.getElementById("allbutton")
+  const resultEl = document.getElementById("result1")
+  const cat = JSON.parse("{{cat|escapejs}}");
+  // console.log(cat)
+  const item = JSON.parse("{{item|escapejs}}");
+  const menuOpenButtonEl=document.getElementById("dialog")
+  // console.log(item)
+
   
-      buttonClicked = document.getElementById(id);
-      buttonClicked.style.background = "rgba(255,0,0,0.6)";
+  
+ const vegItemList= item.filter((i)=>{
+    if (i.type == "VEG"){
+      return true
     }
+    
+  }) 
+  const nonVegItemList= item.filter((i)=>{
+    if (i.type == "NON-VEG"){
+      return true
+    }
+    
+  }) 
+ 
+  const recoItem=item.filter((i)=>{
+    if (i.label){
+      return true
+    }
+  })
+
+
+  const recoVegItem=vegItemList.filter((i)=>{
+    if (i.label){
+      return true
+    }
+  })
+
+  const recoNonVegItem=nonVegItemList.filter((i)=>{
+    if (i.label){
+      return true
+    }
+  })
+
+  const imageitem=item.filter((i)=>{
+    if (i.image){
+      return true
+    }
+  })
+
+
+
+  onLoad()
+  removestylefromdiv()
   
-  </script>
   
-  <script type="text/javascript">
-    window.onload = function () {
-      $("#filter").keyup(function () {
-        var filter = $(this).val(),
-          count = 0;
-        $('#results div').each(function () {
-          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-            $(this).hide();
-          } else {
-            $(this).show();
-            count++;
+  
+ 
+
+function getClassBytype(type){
+    if (type == 'VEG'){
+        return 'veggreen'
+    }
+    else if (type == 'NON-VEG') {
+        return 'nonvegred'
+   
+}
+}
+
+
+
+function categoryRecommendedItem(cat,item){
+
+   
+  var list = `
+      <div class="cateogery" data-aos="zoom-in" data-aos-delay="100">{{hotel.specialheading}}
+         </div>`
+   
+    list+=`<div id="results" class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">`
+   for (var j in item){  
+    if (item[j]['label']){   
+    
+      list += `<div  class="col-lg-6 menu-item filter-starters imageContainer removalstyle">`
+     
+          if(item[j]['image']){
+            list += `<img src="${item[j]['image']}" class="menu-img largeimg" id="thumb" alt="">`
           }
-        });
-      });
-    }
-  </script>
+          list += `<i class="bi bi-stop-btn ${getClassBytype(item[j]['type'])}" style="font-size: 15px;bottom:2px;margin-left:10px;"></i>
+         
+          <div class="menu-content">
+
+            <span style="background: var(--bg-color);color: var(--my-color);">  ${item[j]['title']} </span>
+             <span style="background: var(--bg-color);color: var(--my-color);">`
+
+              if (item[j]['price']=='APS'){
+               list+= `${item[j]['price']}`
+              }
+              else{
+                list+= `${item[j]['price']}`
+              }
+                                          
+              list+= `</span> </div> <div class="menu-ingredients">${item[j]['description']} </div></div>   `
+        }
+      
+      }   
+        list+=` </div>  `
+        
+        recoEl.innerHTML = list
+   
   
-  <!-- browse menu bottom button -->
-  <script>
-    $('#btnShow').click(function () {
-      $('#dialog').dialog('open');
-      closedialog = 0;
-    });
-    var closedialog;
-    function overlayclickclose() {
-      if (closedialog) {
-        $('#dialog').dialog('close');
+}
+      
+  function categoryAndCount(cat){
+    const menuData = document.createElement('div');
+    var list=`<ul style="list-style:square; color:var(--my-color);"> 
+              <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>`
+    for (var i in cat){
+      list += `<li><a href="#${cat[i]['title']}">${cat[i]['title']} 
+        <span style=" font-size: small;"><strong>(${cat[i]['veg_count']})</strong></span></a></li>       
+               
+         `;
+    }
+  
+  list+=`</ul>`
+    menuData.innerHTML=list
+    menuOpenButtonEl.appendChild(menuData)
+
+  }
+
+ 
+  function nonVegCategoryAndCount(cat){
+    const menuData = document.createElement('div');
+    var list=`<ul style="list-style:square; color:var(--my-color);"> 
+              <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>`
+    for (var i in cat){
+      if(cat[i]['nonveg_count']){
+
+        list += `<li><a href="#${cat[i]['title']}">${cat[i]['title']} 
+        <span style=" font-size: small;"><strong>(${cat[i]['veg_count']})</strong></span></a></li>       
+               
+         `;
+    }
+  } 
+  list+=`</ul>`
+    menuData.innerHTML=list
+    menuOpenButtonEl.appendChild(menuData)
+
+  }
+  function vegCategoryAndCount(cat){
+    const menuData = document.createElement('div');
+    var list=`<ul style="list-style:square; color:var(--my-color);"> 
+              <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>`
+    for (var i in cat){
+      if(cat[i]['veg_count']){
+        
+
+      list += `<li><a href="#${cat[i]['title']}">${cat[i]['title']} 
+        <span style=" font-size: small;"><strong>(${cat[i]['veg_count']})</strong></span></a></li>       
+               
+         `;
+    }
+  } 
+  list+=`</ul>`
+    menuData.innerHTML=list
+    menuOpenButtonEl.appendChild(menuData)
+
+  }
+
+  function categoryNonVegItem(cat, item) {
+    
+    var list = ""
+    for (var i in cat) {
+      if (cat[i]['nonveg_count'] > 0) {
+        list+=`<div id="results">
+      <div id="${cat[i]['title']}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" 
+      style="left: 20px;padding-top: 50px;margin-top: -25px;"> ${cat[i]['title']} - (${cat[i]['nonveg_count']})</div>
+       
+        <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">`
       }
-      //set to one because click on dialog box sets to zero 
-        //set to one because click on dialog box sets to zero 
-      //set to one because click on dialog box sets to zero 
+      for (var j in item) {
+        if (item[j]['type'] === 'NON-VEG' & item[j]['categories_id'] === cat[i]['id']){
+            list+=`<div class="col-lg-6 menu-item filter-starters imageContainer">`
+
+              if(item[j]['image']){
+                list += `<img src="${item[j]['image']}" class="menu-img largeimg" id="thumb" alt="">`
+          }
+         
+        
+          list += `<i class="bi bi-stop-btn ${getClassBytype(item[j]['type'])}" style="font-size: 
+          15px;bottom:2px;margin-left:10px;"></i>
+         
+          <div class="menu-content">
+
+            <span style="background: var(--bg-color);color: var(--my-color);">  ${item[j]['title']} </span>
+             <span style="background: var(--bg-color);color: var(--my-color);">`
+
+              if (item[j]['price']=='APS'){
+               list+= `${item[j]['price']}`
+              }
+              else{
+                list+= `${item[j]['price']}`
+              }
+                                          
+              list+= `</span> </div>
+              
+              <div class="menu-ingredients">${item[j]['description']}
+                 </div>
+                 </div>   `
+        }      
+              
+      }
+
+        list+=`</div> `
+    }
+    list+=` </div> `
+    resultEl.innerHTML = list     
+    
+  }
+
+
+  function categoryVegItem(cat, item) {
+    
+    var list = ""
+    for (var i in cat) {
+      if (cat[i]['veg_count'] > 0) {
+        list+=`<div id="results">
+      <div id="${cat[i]['title']}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" 
+      style="left: 20px;padding-top: 50px;margin-top: -25px;"> ${cat[i]['title']} - (${cat[i]['veg_count']})</div>
+       
+        <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">`
+      }
+      for (var j in item) {
+        if (item[j]['type'] === 'VEG' & item[j]['categories_id'] === cat[i]['id']){
+            list+=`<div class="col-lg-6 menu-item filter-starters imageContainer">`
+
+              if(item[j]['image']){
+                list += `<img src="${item[j]['image']}" class="menu-img largeimg" id="thumb" alt="">`
+          }
+        
+          list += `<i class="bi bi-stop-btn ${getClassBytype(item[j]['type'])}" style="font-size: 
+          15px;bottom:2px;margin-left:10px;"></i>
+         
+          <div class="menu-content">
+
+            <span style="background: var(--bg-color);color: var(--my-color);">  ${item[j]['title']} </span>
+             <span style="background: var(--bg-color);color: var(--my-color);">`
+
+              if (item[j]['price']=='APS'){
+               list+= `${item[j]['price']}`
+              }
+              else{
+                list+= `${item[j]['price']}`
+              }
+                                          
+              list+= `</span> </div>
+              
+              <div class="menu-ingredients">${item[j]['description']}
+                 </div>
+                 </div>   `
+        }      
+              
+      }
+
+        list+=`</div> `
+    }
+    list+=` </div> `
+    resultEl.innerHTML = list     
+    
+  }
+
+
+  function categoryAllItem(cat,item) {
+    
+    var list = ""
+    for (var i in cat) {      
+
+        list+=`<div id="results">
+      <div id="${cat[i]['title']}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" 
+      style="left: 20px;padding-top: 50px;margin-top: -25px;"> ${cat[i]['title']} - (${cat[i]['items_count']})</div>
+       
+        <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">`
+
+          for (var j in item) {
+            if (item[j]['categories_id'] === cat[i]['id']){
+            list+=`<div class="col-lg-6 menu-item filter-starters imageContainer">`
+
+              if(item[j]['image']){
+            list += `<img src="${item[j]['image']}" class="menu-img largeimg" alt="">`
+          }
+        
+          list += `<i class="bi bi-stop-btn ${getClassBytype(item[j]['type'])}" style="font-size: 
+          15px;bottom:2px;margin-left:10px;"></i>
+         
+          <div class="menu-content">
+
+            <span style="background: var(--bg-color);color: var(--my-color);">  ${item[j]['title']} </span>
+             <span style="background: var(--bg-color);color: var(--my-color);">`
+
+              if (item[j]['price']=='APS'){
+               list+= `${item[j]['price']}`
+              }
+              else{
+                list+= `${item[j]['price']}`
+              }
+                                          
+              list+= `</span> </div>
+              
+              <div class="menu-ingredients">${item[j]['description']}
+                 </div>
+                 </div>   `
+        }      
+              
+      }
+
+        list+=`</div> `
+    }
+    list+=` </div> `
+    resultEl.innerHTML = list     
+    
+  }
+     
+  function onLoad(){
+    recoEl.innerHTML=''
+    categoryRecommendedItem(cat,item)      
+    
+    categoryAllItem(cat, item)  
+   
+    categoryAndCount(cat)
+  }
+
+
+
+
+
+  allBtn.addEventListener('submit', (e) => {
+    e.preventDefault()
+    allBtnColor.classList.remove('btn-light')
+    allBtnColor.classList.add('btn-warning') 
+    vegBtnColor.classList.add('btn-light')
+    nonVegBtnColor.classList.add('btn-light')
+    recoEl.innerHTML=''
+    categoryRecommendedItem(cat,recoItem)  
+
+    resultEl.innerHTML = ''
+    categoryAllItem(cat, item)
+    menuOpenButtonEl.innerHTML=''
+    categoryAndCount(cat)
+  });
+
+
+
+
+  nonVegBtn.addEventListener('submit', (e) => {
+    e.preventDefault()
+    nonVegBtnColor.classList.remove('btn-light')
+    nonVegBtnColor.classList.add('btn-danger')    
+    vegBtnColor.classList.add('btn-light')
+    allBtnColor.classList.add('btn-light') 
+    recoEl.innerHTML=''
+    categoryRecommendedItem(cat,recoNonVegItem)
+   
+    resultEl.innerHTML = ''
+    categoryNonVegItem(cat, item)
+    menuOpenButtonEl.innerHTML=''
+    nonVegCategoryAndCount(cat)
+  });
+
+  
+
+  vegBtn.addEventListener('submit', (e) => {
+    e.preventDefault()
+    vegBtnColor.classList.remove('btn-light')
+    vegBtnColor.classList.add('btn-success')    
+    allBtnColor.classList.add('btn-light')
+    nonVegBtnColor.classList.add('btn-light')
+    recoEl.innerHTML=''
+    categoryRecommendedItem(cat,recoVegItem)
+    
+    resultEl.innerHTML = ''
+    categoryVegItem(cat, item)
+    menuOpenButtonEl.innerHTML=''
+    vegCategoryAndCount(cat)
+  });
+
+
+
+  var findItemByCategoryId = function(id) {
+    var i = null;
+    var result = []
+    for (i = 0; item.length > i; i += 1) {
+        if (item[i].categories_id === id) {
+            result.push(item[i]);
+        }
+    }
+    return result;
+};
+
+function removestylefromdiv(){
+
+  const styleDiv=document.querySelectorAll(".removalstyle")
+  console.log (styleDiv)
+  styleDiv.forEach(div=>{div.removeAttribute('style')
+})
+}
+
+
+
+// example:
+// categoryItems = findItemByCategoryId(0);
+// for(var i=0; i<items.length; i++) {
+//     //alert(items[i].name)
+// }
+
+var findCategoryById = function(id) {
+    var i = null;
+    for (i = 0; cat.length > i; i += 1) {
+        if (cat[i].id === id) {
+            return cat[i];
+        }
+    }
+};
+
+// for(i=1;i<cat.length+1;i++){
+//   console.log(findCategoryById(i))
+//   console.log(findItemByCategoryId(i))
+    
+// }
+
+
+</script>
+
+
+<!-- browse menu bottom button -->
+ <script>
+
+$(document).ready(function(){
+  $("#btnShow").on('click', function(){
+    $('#dialog').dialog('open');
+     
+      // alert( "clicked" );
+    
+    closedialog = 0;
+  });
+});
+
+
+  var closedialog;
+  function overlayclickclose() {
+    if (closedialog) {
+      $('#dialog').dialog('close');
+    }
+   
+    closedialog = 1;
+  }
+
+
+  $('#dialog').dialog({
+    autoOpen: false,
+    closeOnEscape: true,
+    modal: false,
+    title: "Menu",
+    width: 350,
+    height: 350,
+    position: { my: "bottom center", at: "center bottom ", of: window },
+    open: function () {
+      $(".ui-dialog-titlebar-close").show();
       closedialog = 1;
-    }
-    $('#dialog').dialog({
-      autoOpen: false,
-      closeOnEscape: true,
-      modal: false,
-      title: "Menu",
-      width: 350,
-      height: 350,
-      position: { my: "bottom center", at: "center bottom ", of: window },
-      open: function () {
-        $(".ui-dialog-titlebar-close").hide();
-        closedialog = 1;
-        $(document).bind('click', overlayclickclose);
-      },
-      focus: function () {
-        closedialog = 1;
-      },
-      close: function () {
-        $(document).unbind('click');
-      },
-  
+      $(document).bind('click', overlayclickclose);
+    },
+    focus: function () {
+      closedialog = 1;
+    },
+    close: function () {
+      $(document).unbind('click');
+    },
+
+  });
+
+
+
+</script>
+
+<script type="text/javascript">
+  window.onload = function () {
+    $("#filter").keyup(function () {
+      var filter = $(this).val(),
+        count = 0;
+      $('#results div').each(function () {
+        if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+          $(this).hide();
+        } else {
+          $(this).show();
+          count++;
+        }
+      });
     });
-  </script>
-  
-  <!-- stick search bar-->
-  <script>
-    window.onscroll = function () { myFunction() };
-  
-    var header = document.getElementById("myHeader");
-    var sticky = header.offsetTop;
-  
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
+  }
+</script>
+
+<!-- stick search bar-->
+<script>
+  window.onscroll = function () { myFunction() };
+
+  var header = document.getElementById("myHeader");
+  var sticky = header.offsetTop;
+
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      header.classList.add("sticky");
+    } else {
+      header.classList.remove("sticky");
     }
-  </script>
+  }
+</script>
+
+
 
 {% endblock content%}
   
