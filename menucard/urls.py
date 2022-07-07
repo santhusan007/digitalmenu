@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from .views import ( landing,newMenuDisplayJson)
 
+from .views import ( landing,newMenuDisplayJson)
 
 
 app_name = "menucard"
