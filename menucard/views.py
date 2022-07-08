@@ -27,30 +27,18 @@ def newMenuDisplayJson(request,header):
     check3=Q(Category__active=True)   
     #filtering base on veg non veg and all  
     menu=MainView(check1,check2,check3)
-
-    details=menu.allitem() 
-     
-    image_url={}
-    for cat in details:
-        for item in cat.Category.all():
-            if item.image:
-                image_url[item.id]=item.image.url
-    
-    cat=menu.allitem().values()        
-    cat=list(cat)
+    details=menu.allitem()      
+    image_url={item.id:item.image.url for cat in details for item in cat.Category.all() if item.image }
+    cat=list(details.values())
     finalcat=dumps(cat)  
-
     items=Item.objects.all().filter(hotel_id=hotel.id).values() 
     items=list(items)
     for i in items:
         for image in image_url:
             if i['id']==image:
-                i['image']=image_url[i['id']]
-                
+                i['image']=image_url[i['id']]                
      
     finalitem=dumps(items)
-
-
-    context= {"hotel":hotel,"cat":finalcat,"item":finalitem}
+    context= {"hotel":hotel,"details":details,"cat":finalcat,"item":finalitem}
     return render(request, 'menucard/newmenuJson.html', context)
 

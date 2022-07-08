@@ -12,6 +12,7 @@
 {% include "menucard/customcss.html" %}
 {% include "menucard/customheader.html" %}
 
+
   <section id="menu" class="menu section-bg">
     <div class="container">
   
@@ -52,9 +53,85 @@
   {% endif %}
 
   </div>
- <div id="results"></div>
+  <div id="results">
+    <div class="cateogery" data-aos="zoom-in" data-aos-delay="100"> {{hotel.specialheading}} </div>
+    {% for category in details %}
+    <div id="results" class="row menu-container box-shadow" >
+      {% for item in category.Category.all %}
+      {% if item.label %}
+      <div class="col-lg-6 menu-item filter-starters imageContainer" data-aos="zoom-in" data-aos-delay="100">
+        {% if item.image %}
+        <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
+        {% endif %}
+        
+        <i class="bi bi-stop-btn {%if item.type == 'NON-VEG' %} nonvegred {% else %} veggreen {% endif %} " style="font-size: 15px;bottom:2px;margin-left:10px;"></i>
+        <div class="menu-content">
+          <span style="background: var(--bg-color);color: var(--my-color);"> {{item.title}} </span> <span
+            style="background: var(--bg-color);color: var(--my-color);">
+            {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
 
-  <div id='result1'></div>
+        </div>          
+
+        <div class="menu-ingredients">
+          {{item.description}}
+        </div>
+
+      </div>      
+
+      
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+  <div id='result1'>
+    {% for category in details %}
+
+    <div id="results">
+      <div id="{{category}}" class="cateogery" data-aos="zoom-in" data-aos-delay="100" style="left: 20px;padding-top: 50px;
+        margin-top: -25px;"> {{category}}</div>
+      <!-- {{category}} ({{category.items_count}}) </div> -->
+      <div class="row menu-container box-shadow" data-aos="zoom-in" data-aos-delay="100">
+
+        {% for item in category.Category.all %}
+        <!-- very very important -->
+      
+        <div class="col-lg-6 menu-item filter-starters imageContainer">
+          {% if item.image %}
+          <img src="{{item.image.url }}" class="menu-img largeimg" alt="">
+
+          {% endif %}
+          
+
+          <i class="bi bi-stop-btn non-veg {%if item.type == 'NON-VEG' %} nonvegred {% else %} veggreen {% endif %}" style="font-size: 15px;bottom:2px;margin-left:10px;"></i>
+          <div class="menu-content non-veg">
+            <span style="background: var(--bg-color);;color: var(--my-color);"> {{item.title}} </span> <span
+              style="background: var(--bg-color);color: var(--my-color);">
+              {% if item.price == 'APS' %} {{item.price}} {% else %} ₹{{item.price}} {% endif %}</span>
+
+          </div>          
+
+          <div class="menu-ingredients">
+            {{item.description}}
+          </div>
+
+        </div>       
+        {% endfor %}
+      </div>
+      {% endfor %}
+
+    </div>
+  
+
+
+
+
+
+  </div>
+  
 
 </div>
 </section>
@@ -64,9 +141,18 @@
     <!--button class="feedback toggle">Browse Menu</button-->
     <input class="feedback" type="button" id="btnShow" style="z-index: 9" value="Browse Menu" />
     
-    <div id="dialog"  style="display:none;">
+    <div id="dialog" style="display: none;">
      
-     
+         
+      <ul style="list-style:square; color:var(--my-color);">
+        <li><a href="#recommended"><strong>RECOMMENDED</strong></a></li>
+        {% for category in details %}
+
+        <li><a href="#{{category}}">{{category}} <span
+              style=" font-size: small;"><strong>({{category.items_count}})</strong></span></a></li>
+
+        {% endfor %}
+      </ul>
     </div>
     <div>
       <a href="{{hotel.whatsapplink}}" target="_blank"> <img src="/static/assets/img/wa1.png" id="wa" style="z-index: 9"
@@ -86,10 +172,9 @@
 <br>
 <br>
 <br><br>
-
 <!-- Vendor JS Files -->
 <!-- serch function -->
 
-{% include "menucard/customscript.html" %}
 
+{% include "menucard/customscript.html" %}
 {% endblock %}
